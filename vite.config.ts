@@ -13,11 +13,5 @@ export default defineConfig({
     server: { entry: "server" },
   },
   server: { port: process.env.PORT ? parseInt(process.env.PORT) : undefined, strictPort: false },
-  vite: {
-    resolve: {
-      alias: {
-        'lucide-react': 'lucide-react/dist/esm/lucide-react.js'
-      }
-    },
-  },
+  ,
 });
