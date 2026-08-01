@@ -12,6 +12,5 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  server: { port: process.env.PORT ? parseInt(process.env.PORT) : undefined, strictPort: false },
-  ,
+  server: { port: process.env.PORT ? parseInt(process.env.PORT) : undefined, strictPort: false }
 });
