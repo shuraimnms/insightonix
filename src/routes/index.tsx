@@ -57,16 +57,16 @@ const INDEXING_PARTNERS = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Insightonix Global Insights Journal" },
+      { title: "INSIGHTONIX — Insightonix Global Insights Journal" },
       {
         name: "description",
         content:
-          "INSIGHTONIX is an international peer-reviewed open-access multidisciplinary journal dedicated to publishing innovative, high-impact research.",
+          "INSIGHTONIX is a peer-reviewed, open access journal publishing innovative research in global insights, analytics and multidisciplinary trends.",
       },
-      { property: "og:title", content: "Insightonix Global Insights Journal" },
+      { property: "og:title", content: "INSIGHTONIX — Insightonix Global Insights Journal" },
       {
         property: "og:description",
-        content: "Peer-reviewed, open access multidisciplinary journal.",
+        content: "Peer-reviewed, open access quarterly journal in global insights.",
       },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -92,10 +92,10 @@ const QUICK_LINKS = [
 ] as const;
 
 const FEATURES = [
-  { icon: Globe, title: "International Journal", body: "Reach scholars and researchers worldwide" },
-  { icon: Database, title: "Multidisciplinary Research", body: "Publishing across all major disciplines" },
-  { icon: Zap, title: "Global Research Visibility", body: "High impact and wide discoverability" },
   { icon: Unlock, title: "Open Access", body: "Freely available for reading and download" },
+  { icon: Users, title: "Double Blind Review", body: "All submissions are reviewed anonymously" },
+  { icon: CalendarDays, title: "Quarterly Publication", body: "4 Issues per year (Mar, Jun, Sep, Dec)" },
+  { icon: Globe, title: "Global Readership", body: "Reach scholars and researchers worldwide" },
 ] as const;
 
 const WHY_POINTS = [
@@ -116,92 +116,165 @@ function Home() {
 
   return (
     <SiteLayout>
-      {/* Breadcrumb */}
-      <div className="border-b border-border/60 bg-brand-muted/30">
-        <div className="container-page flex items-center gap-2 py-3 text-sm">
-          <Link to="/" className="text-brand hover:underline">Home</Link>
-          <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
-          <span className="text-muted-foreground truncate">{JOURNAL.name}</span>
+      {/* Exact Hero Section from Image */}
+      <section className="relative w-full h-[600px] overflow-hidden bg-[#000000]">
+        {/* Full Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/images/insightonix_hero_bg.jpg" 
+            alt="Global Research" 
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+
+        {/* Right Edge Call for Papers Tab */}
+        <Link to="/conferences/call-for-papers" className="absolute right-0 top-[20%] z-30 bg-[#2563eb] text-white py-4 px-2 rounded-l-md font-bold text-sm tracking-widest writing-mode-vertical hover:bg-[#1d4ed8] transition-colors shadow-lg" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+          CALL FOR PAPERS
+        </Link>
+
+        {/* Left Dark Blue Overlay Box */}
+        <div className="relative z-10 container-page h-full flex items-center">
+          <div className="w-full max-w-[500px] bg-[#000000]/95 backdrop-blur-sm p-8 md:p-10 rounded-tr-[40px] rounded-br-[10px] rounded-tl-[10px] rounded-bl-[10px] shadow-2xl relative overflow-hidden">
+            
+            {/* Green top-left corner accent to mimic image's swoosh from header (optional, but requested exactness so we focus on the box content) */}
+            
+            {/* Small Gold Squares */}
+            <div className="flex gap-1.5 mb-6">
+              <div className="w-2 h-2 bg-[#3b82f6]"></div>
+              <div className="w-2 h-2 bg-[#3b82f6]"></div>
+              <div className="w-2 h-2 bg-[#3b82f6]"></div>
+              <div className="w-2 h-2 bg-[#3b82f6]"></div>
+            </div>
+            
+            <h1 className="font-serif text-4xl md:text-[42px] font-bold leading-[1.1] text-white mb-4">
+              Global <br />
+              <span className="text-[#3b82f6]">Insights, Trends</span> <br />
+              and Analytics
+            </h1>
+            
+            <p className="text-white/90 text-[15px] leading-relaxed mb-8 max-w-sm">
+              Data-driven perspectives and analytical insights on global trends.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 mb-10">
+              <Link
+                to="/current-issue"
+                className="bg-[#3b82f6] hover:bg-[#c2984b] text-[#000000] font-medium text-sm px-6 py-2.5 rounded-sm transition-colors"
+              >
+                Explore Research
+              </Link>
+              <Link
+                to="/submit"
+                className="bg-transparent border border-[#3b82f6] text-[#3b82f6] hover:bg-[#3b82f6]/10 font-medium text-sm px-6 py-2.5 rounded-sm transition-colors"
+              >
+                Submit Manuscript
+              </Link>
+            </div>
+
+            {/* Icons List */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-6 flex justify-center"><Stamp className="h-5 w-5 text-[#3b82f6]" /></div>
+                <span className="text-white font-medium text-sm tracking-wider uppercase w-24">ANALYTICS</span>
+                <div className="flex-1 flex items-center">
+                  <div className="h-[1px] bg-black/20 flex-1"></div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></div>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-6 flex justify-center"><LineChart className="h-5 w-5 text-[#3b82f6]" /></div>
+                <span className="text-white font-medium text-sm tracking-wider uppercase w-24">INSIGHTS</span>
+                <div className="flex-1 flex items-center">
+                  <div className="h-[1px] bg-black/20 flex-1"></div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></div>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-6 flex justify-center"><Zap className="h-5 w-5 text-[#3b82f6]" /></div>
+                <span className="text-white font-medium text-sm tracking-wider uppercase w-24">GLOBAL</span>
+                <div className="flex-1 flex items-center">
+                  <div className="h-[1px] bg-black/20 flex-1"></div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      {/* Research Network Strip */}
+      <div className="relative bg-[#111111] py-6 border-b-4 border-[#3b82f6]">
+        {/* Overlapping Badge */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black border border-[#3b82f6] px-6 py-1.5 rounded-full shadow-sm z-20">
+          <span className="text-[#3b82f6] font-serif font-bold text-sm tracking-widest uppercase">
+            RESEARCH NETWORK
+          </span>
+        </div>
+
+        <div className="container-page relative z-10 flex flex-wrap items-center justify-between px-4 lg:px-12 pt-4">
+          
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full border-2 border-[#3b82f6] flex items-center justify-center bg-[#3b82f6]">
+              <Globe2 className="h-5 w-5 text-white" />
+            </div>
+            <span className="font-serif font-bold text-[#000000] tracking-wide">ANALYTICS</span>
+          </div>
+
+          <div className="hidden md:block flex-1 mx-4">
+            <div className="flex items-center justify-center w-full">
+              <div className="w-2 h-2 rounded-full bg-[#3b82f6] opacity-50"></div>
+              <div className="h-[1px] w-full bg-[#3b82f6] opacity-30"></div>
+              <div className="w-2 h-2 rounded-full bg-[#3b82f6] opacity-50"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full border-2 border-[#3b82f6] flex items-center justify-center bg-[#3b82f6]">
+              <LineChart className="h-5 w-5 text-white" />
+            </div>
+            <span className="font-serif font-bold text-[#000000] tracking-wide">INSIGHTS</span>
+          </div>
+
+          <div className="hidden md:block flex-1 mx-4">
+            <div className="flex items-center justify-center w-full">
+              <div className="w-2 h-2 rounded-full bg-[#3b82f6] opacity-50"></div>
+              <div className="h-[1px] w-full bg-[#3b82f6] opacity-30"></div>
+              <div className="w-2 h-2 rounded-full bg-[#3b82f6] opacity-50"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full border-2 border-[#3b82f6] flex items-center justify-center bg-[#3b82f6]">
+              <Users className="h-5 w-5 text-white" />
+            </div>
+            <span className="font-serif font-bold text-[#000000] tracking-wide">GLOBAL TRENDS</span>
+          </div>
+
+          <div className="hidden md:block flex-1 mx-4">
+            <div className="flex items-center justify-center w-full">
+              <div className="w-2 h-2 rounded-full bg-[#3b82f6] opacity-50"></div>
+              <div className="h-[1px] w-full bg-[#3b82f6] opacity-30"></div>
+              <div className="w-2 h-2 rounded-full bg-[#3b82f6] opacity-50"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full border-2 border-[#3b82f6] flex items-center justify-center bg-[#3b82f6]">
+              <Globe2 className="h-5 w-5 text-white" />
+            </div>
+            <span className="font-serif font-bold text-[#000000] tracking-wide">DATA</span>
+          </div>
+
         </div>
       </div>
 
-      {/* Main grid: content + sidebar */}
+      {/* Existing content layout wrappers */}
       <section className="container-page py-8 lg:py-10">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-          {/* LEFT: hero + cover */}
-          <div>
-            <div className="grid gap-8 md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] items-start">
-              {/* Copy */}
-              <div>
-                <h1 className="font-serif text-3xl md:text-4xl lg:text-[2.6rem] font-bold uppercase leading-[1.15] text-brand">
-                  Insightonix Global Insights Journal
-                  <span className="block text-brand/90">(INSIGHTONIX)</span>
-                </h1>
-                <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground max-w-xl">
-                  INSIGHTONIX is an international peer-reviewed open-access multidisciplinary journal committed to publishing
-                  innovative, high-impact research across science, engineering, technology, medicine, business, education, humanities, and more.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link
-                    to="/submit"
-                    className="inline-flex h-11 items-center gap-2 rounded-md bg-gold px-5 text-sm font-semibold text-white shadow-elev hover:brightness-105 transition"
-                    style={{ background: "var(--gold)" }}
-                  >
-                    <FileText className="h-4 w-4" /> Submit Manuscript
-                  </Link>
-                  <Link
-                    to="/current-issue"
-                    className="inline-flex h-11 items-center gap-2 rounded-md border-2 border-gold bg-background px-5 text-sm font-semibold text-brand hover:bg-gold/5 transition"
-                    style={{ borderColor: "var(--gold)" }}
-                  >
-                    <BookOpen className="h-4 w-4" /> View Current Issue
-                  </Link>
-                </div>
-              </div>
-
-              {/* Cover */}
-              <div className="mx-auto w-full max-w-[280px]">
-                <div className="relative aspect-[3/4] rounded-sm border border-border bg-[oklch(0.97_0.02_75)] shadow-elev overflow-hidden">
-                  {/* Bookmark ribbon */}
-                  <div className="absolute left-6 top-0 h-16 w-8" style={{ background: "var(--gold)" }}>
-                    <div className="absolute -bottom-2 left-0 h-0 w-0 border-l-[16px] border-r-[16px] border-t-[10px] border-l-transparent border-r-transparent" style={{ borderTopColor: "var(--gold)" }} />
-                  </div>
-                  <div className="absolute left-6 top-0 h-16 w-8 -translate-x-[10px] opacity-70" style={{ background: "var(--brand)" }}>
-                    <div className="absolute -bottom-2 left-0 h-0 w-0 border-l-[16px] border-r-[16px] border-t-[10px] border-l-transparent border-r-transparent" style={{ borderTopColor: "var(--brand)" }} />
-                  </div>
-                  <div className="flex h-full flex-col items-center justify-center px-6 text-center">
-                    <div className="font-serif text-4xl font-bold text-brand">INSIGHTONIX</div>
-                    <div className="mt-3 h-[2px] w-14" style={{ background: "var(--gold)" }} />
-                    <div className="mt-4 text-[11px] font-semibold uppercase tracking-wider text-brand/80 leading-snug">
-                      Insightonix Global Insights Journal
-                    </div>
-                  </div>
-                  {/* wave */}
-                  <svg className="absolute inset-x-0 bottom-0" viewBox="0 0 200 60" preserveAspectRatio="none">
-                    <path d="M0,40 Q50,10 100,35 T200,30 L200,60 L0,60 Z" fill="var(--brand)" opacity="0.08" />
-                    <path d="M0,45 Q50,20 100,45 T200,40 L200,60 L0,60 Z" fill="var(--gold)" opacity="0.15" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            {/* Feature strip */}
-            <div className="mt-8 rounded-lg border border-border bg-card shadow-sm">
-              <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border">
-                {FEATURES.map(({ icon: Icon, title, body }) => (
-                  <div key={title} className="p-5 text-center">
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full" style={{ color: "var(--gold)" }}>
-                      <Icon className="h-8 w-8" strokeWidth={1.75} />
-                    </div>
-                    <div className="mt-2 font-semibold text-sm text-foreground">{title}</div>
-                    <div className="mt-1 text-xs text-muted-foreground leading-snug">{body}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+          <div className="space-y-6">
             {/* 4-column info panels */}
-            <div className="mt-6 rounded-lg border border-border bg-card p-6 shadow-sm">
+            <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
               <div className="grid gap-6 md:grid-cols-4">
                 {/* Call for papers */}
                 <InfoBlock title="CALL FOR PAPERS">
@@ -277,6 +350,76 @@ function Home() {
                 </InfoBlock>
               </div>
             </div>
+
+            {/* Bottom Widgets */}
+            <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* User login */}
+                <InfoBlock title="USER LOGIN">
+                  <form
+                    className="space-y-3 mt-1"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      window.location.href = "/auth";
+                    }}
+                  >
+                    <div>
+                      <label className="text-xs font-medium text-foreground">Username</label>
+                      <input
+                        type="text"
+                        className="mt-1 w-full rounded border border-input bg-background px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-foreground">Password</label>
+                      <input
+                        type="password"
+                        className="mt-1 w-full rounded border border-input bg-background px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30"
+                      />
+                    </div>
+                    <label className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <input type="checkbox" className="h-3.5 w-3.5" /> Remember me
+                    </label>
+                    <button
+                      type="submit"
+                      className="w-full rounded px-3 py-2 text-sm font-semibold text-white shadow-sm hover:brightness-105 transition"
+                      style={{ background: "var(--gold)" }}
+                    >
+                      Login
+                    </button>
+                    <div className="flex justify-between text-xs">
+                      <Link to="/auth" className="underline" style={{ color: "var(--gold)" }}>Forgot Password?</Link>
+                      <Link to="/auth" search={{ mode: "up" }} className="underline" style={{ color: "var(--gold)" }}>Create Account</Link>
+                    </div>
+                  </form>
+                </InfoBlock>
+
+                {/* Indexing */}
+                <InfoBlock title="ABSTRACTING & INDEXING">
+                  <div className="grid grid-cols-2 gap-3 mt-1">
+                    {(indexing.length > 0
+                      ? indexing.slice(0, 6)
+                      : [
+                          { name: "Google Scholar", url: "/google-scholar" },
+                          { name: "Dimensions", url: "/indexing" },
+                          { name: "Crossref", url: "/crossref" },
+                          { name: "DOAJ(APPLIED FOR)", url: "/indexing" },
+                        ]
+                    ).map((i) => (
+                      <a
+                        key={i.name}
+                        href={i.url}
+                        target={i.url.startsWith("http") ? "_blank" : undefined}
+                        rel="noopener noreferrer"
+                        className="flex h-16 items-center justify-center rounded border border-border bg-background px-2 text-center text-xs font-semibold text-brand hover:border-brand transition"
+                      >
+                        {i.name}
+                      </a>
+                    ))}
+                  </div>
+                </InfoBlock>
+              </div>
+            </div>
           </div>
 
           {/* RIGHT SIDEBAR */}
@@ -297,71 +440,6 @@ function Home() {
                   </li>
                 ))}
               </ul>
-            </SidebarCard>
-
-            {/* User login */}
-            <SidebarCard title="USER LOGIN">
-              <form
-                className="space-y-3 p-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  window.location.href = "/auth";
-                }}
-              >
-                <div>
-                  <label className="text-xs font-medium text-foreground">Username</label>
-                  <input
-                    type="text"
-                    className="mt-1 w-full rounded border border-input bg-background px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30"
-                  />
-                </div>
-                <div>
-                  <label className="text-xs font-medium text-foreground">Password</label>
-                  <input
-                    type="password"
-                    className="mt-1 w-full rounded border border-input bg-background px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand/30"
-                  />
-                </div>
-                <label className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <input type="checkbox" className="h-3.5 w-3.5" /> Remember me
-                </label>
-                <button
-                  type="submit"
-                  className="w-full rounded px-3 py-2 text-sm font-semibold text-white shadow-sm hover:brightness-105 transition"
-                  style={{ background: "var(--gold)" }}
-                >
-                  Login
-                </button>
-                <div className="flex justify-between text-xs">
-                  <Link to="/auth" className="underline" style={{ color: "var(--gold)" }}>Forgot Password?</Link>
-                  <Link to="/auth" search={{ mode: "up" }} className="underline" style={{ color: "var(--gold)" }}>Create Account</Link>
-                </div>
-              </form>
-            </SidebarCard>
-
-            {/* Indexing */}
-            <SidebarCard title="ABSTRACTING & INDEXING">
-              <div className="grid grid-cols-2 gap-3 p-4">
-                {(indexing.length > 0
-                  ? indexing.slice(0, 6)
-                  : [
-                      { name: "Google Scholar", url: "/google-scholar" },
-                      { name: "Dimensions", url: "/indexing" },
-                      { name: "Crossref", url: "/crossref" },
-                      { name: "DOAJ(APPLIED FOR)", url: "/indexing" },
-                    ]
-                ).map((i) => (
-                  <a
-                    key={i.name}
-                    href={i.url}
-                    target={i.url.startsWith("http") ? "_blank" : undefined}
-                    rel="noopener noreferrer"
-                    className="flex h-16 items-center justify-center rounded border border-border bg-background px-2 text-center text-xs font-semibold text-brand hover:border-brand transition"
-                  >
-                    {i.name}
-                  </a>
-                ))}
-              </div>
             </SidebarCard>
           </aside>
         </div>
@@ -389,16 +467,17 @@ function Home() {
         <div className="container-page relative py-14 lg:py-16">
           <div className="text-center">
             <div
-              className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold tracking-widest uppercase backdrop-blur"
+              className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/10 px-3 py-1 text-[11px] font-semibold tracking-widest uppercase backdrop-blur"
               style={{ color: "var(--gold)" }}
             >
               <Sparkles className="h-3.5 w-3.5" /> Journal at a Glance
             </div>
             <h2 className="mt-4 font-serif text-3xl md:text-4xl font-semibold">
-              Advancing global research
+              A decade of rigorous scholarship
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-sm md:text-[15px] text-white/75">
-              INSIGHTONIX has been advancing peer-reviewed multidisciplinary research with global visibility, ethical publishing and open access.
+              INSIGHTONIX has been advancing peer-reviewed research in commerce, management and allied
+              disciplines with global visibility, ethical publishing and open access.
             </p>
           </div>
 
@@ -411,7 +490,7 @@ function Home() {
             ].map(({ icon: Icon, value, label }) => (
               <div
                 key={label}
-                className="rounded-xl border border-white/15 bg-white/[0.06] p-5 text-center backdrop-blur-sm transition hover:bg-white/[0.1]"
+                className="rounded-xl border border-white/15 bg-black/[0.06] p-5 text-center backdrop-blur-sm transition hover:bg-black/[0.1]"
               >
                 <div
                   className="mx-auto flex h-11 w-11 items-center justify-center rounded-full"
@@ -517,7 +596,9 @@ function Home() {
                 Subject areas we publish
               </h2>
               <p className="mt-4 text-sm md:text-[15px] text-muted-foreground leading-relaxed">
-                INSIGHTONIX welcomes original manuscripts across Computer Science, Engineering, Medicine, Humanities, and Multidisciplinary global research domains, from empirical studies and conceptual reviews to case research and policy analysis.
+                INSIGHTONIX welcomes original manuscripts across commerce, management, finance and allied
+                interdisciplinary domains, from empirical studies and conceptual reviews to case
+                research and policy analysis.
               </p>
               <Link
                 to="/aims-scope"
@@ -529,15 +610,15 @@ function Home() {
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               {[
-                "Computer Science",
-                "Engineering",
-                "Medicine",
-                "Humanities",
-                "Multidisciplinary Research",
-                "Technology",
-                "Business",
-                "Social Sciences",
-                "Environmental Studies",
+                "Data Analytics",
+                "Global Economics",
+                "Market Trends",
+                "Business Intelligence",
+                "Strategic Management",
+                "Consumer Insights",
+                "Policy Analysis",
+                "Social Studies",
+                "Innovation",
               ].map((s) => (
                 <div
                   key={s}
@@ -577,7 +658,7 @@ function Home() {
           <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
             <div className="text-white">
               <div
-                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest backdrop-blur"
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest backdrop-blur"
                 style={{ color: "var(--gold)" }}
               >
                 <Zap className="h-3.5 w-3.5" /> Call for Papers
@@ -587,7 +668,7 @@ function Home() {
                 <span style={{ color: "var(--gold)" }}>Volume 11, Issue 3</span>
               </h2>
               <p className="mt-3 max-w-xl text-sm md:text-[15px] text-white/80">
-                Original, unpublished research across all major disciplines is
+                Original, unpublished research in global insights, analytics and multidisciplinary trends is
                 invited. Fast-track peer review, DOI on acceptance, and open access indexing.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
@@ -600,7 +681,7 @@ function Home() {
                 </Link>
                 <Link
                   to="/author-guidelines"
-                  className="inline-flex h-11 items-center gap-2 rounded-md border border-white/40 bg-white/5 px-5 text-sm font-semibold text-white hover:bg-white/10 transition"
+                  className="inline-flex h-11 items-center gap-2 rounded-md border border-white/40 bg-black/5 px-5 text-sm font-semibold text-white hover:bg-black/10 transition"
                 >
                   Author guidelines
                 </Link>
@@ -615,7 +696,7 @@ function Home() {
               ].map((it) => (
                 <div
                   key={it.k}
-                  className="rounded-xl border border-white/15 bg-white/[0.07] p-4 text-center backdrop-blur"
+                  className="rounded-xl border border-white/15 bg-black/[0.07] p-4 text-center backdrop-blur"
                 >
                   <div className="text-[10.5px] font-bold uppercase tracking-widest text-white/70">
                     {it.k}
@@ -695,7 +776,7 @@ function Home() {
       <section className="border-t border-border bg-card">
         <div className="container-page grid gap-6 py-8 md:grid-cols-3">
           <ContactItem icon={Mail} label="EDITORIAL EMAIL" value={JOURNAL.email} />
-          <ContactItem icon={Globe2} label="WEBSITE" value="www.insightonix.com" />
+          <ContactItem icon={Globe2} label="WEBSITE" value="www.ijarcm.com" />
           <ContactItem icon={MapPin} label="ADDRESS" value="India" />
         </div>
       </section>
