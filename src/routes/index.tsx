@@ -127,7 +127,7 @@ function Home() {
           />
         </div>
           {/* Elegant Dark gradient for text readability without blocking the image */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-black/5"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-black/5 pointer-events-none z-0"></div>
 
         {/* Right Edge Call for Papers Tab */}
         <Link to="/conferences/call-for-papers" className="hidden md:flex absolute right-0 top-[20%] z-30 bg-[#2563eb] text-white py-4 px-2 rounded-l-md font-bold text-sm tracking-widest writing-mode-vertical hover:bg-[#1d4ed8] transition-colors shadow-lg" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
@@ -160,10 +160,10 @@ function Home() {
               Data-driven perspectives and analytical insights on global trends.
             </p>
             
-            <div className="flex flex-wrap gap-4 mb-10">
+            <div className="flex flex-wrap gap-4 mb-10 relative z-20">
               <Link
                 to="/current-issue"
-                className="bg-[#3b82f6] hover:brightness-110 text-[#000000] font-bold text-[15px] px-8 py-3.5 rounded-full transition-all shadow-[0_4px_14px_0_rgba(0,0,0,0.3)] hover:shadow-[0_6px_20px_rgba(255,255,255,0.15)] hover:-translate-y-0.5"
+                className="bg-[#3b82f6] hover:brightness-110 text-white font-bold text-[15px] px-8 py-3.5 rounded-full transition-all shadow-[0_4px_14px_0_rgba(0,0,0,0.3)] hover:shadow-[0_6px_20px_rgba(255,255,255,0.15)] hover:-translate-y-0.5"
               >
                 Explore Research
               </Link>
