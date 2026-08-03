@@ -3,7 +3,7 @@
 // Nav structure mirrors the INSIGHTONIX policy document's site map.
 
 export const JOURNAL = {
-  name: "INSIGHTONIX Global Research",
+  name: "Insightonix Global Insights Journal",
   short: "INSIGHTONIX",
   tagline:
     "A Peer-Reviewed, Open Access International Journal for High-Quality Multidisciplinary Research in Computer Science, Engineering, Medicine, Business, Humanities, and Life Sciences.",

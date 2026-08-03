@@ -57,13 +57,13 @@ const INDEXING_PARTNERS = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "INSIGHTONIX — Insightonix Global Insights Journal" },
+      { title: "Insightonix — Insightonix Global Insights Journal" },
       {
         name: "description",
         content:
           "INSIGHTONIX is a peer-reviewed, open access journal publishing innovative research in global insights, analytics and multidisciplinary trends.",
       },
-      { property: "og:title", content: "INSIGHTONIX — Insightonix Global Insights Journal" },
+      { property: "og:title", content: "Insightonix — Insightonix Global Insights Journal" },
       {
         property: "og:description",
         content: "Peer-reviewed, open access quarterly journal in global insights.",
@@ -146,6 +146,9 @@ function Home() {
               <div className="w-2 h-2 bg-[#3b82f6]"></div>
             </div>
             
+            <div className="text-[11.5px] md:text-[13px] font-bold tracking-[0.15em] text-white/90 uppercase mb-4 leading-relaxed">
+              Insightonix Global Insights Journal
+            </div>
             <h1 className="font-serif text-4xl md:text-[42px] font-bold leading-[1.1] text-white mb-4">
               Global <br />
               <span className="text-[#3b82f6]">Insights, Trends</span> <br />
