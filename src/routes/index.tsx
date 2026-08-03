@@ -117,7 +117,7 @@ function Home() {
   return (
     <SiteLayout>
       {/* Exact Hero Section from Image */}
-      <section className="relative w-full h-[600px] lg:h-[700px] overflow-hidden bg-[#000000]">
+      <section className="relative w-full min-h-[100svh] md:min-h-[600px] lg:min-h-[700px] overflow-hidden bg-[#000000]">
         {/* Full Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -130,13 +130,13 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-black/5"></div>
 
         {/* Right Edge Call for Papers Tab */}
-        <Link to="/conferences/call-for-papers" className="absolute right-0 top-[20%] z-30 bg-[#2563eb] text-white py-4 px-2 rounded-l-md font-bold text-sm tracking-widest writing-mode-vertical hover:bg-[#1d4ed8] transition-colors shadow-lg" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+        <Link to="/conferences/call-for-papers" className="hidden md:flex absolute right-0 top-[20%] z-30 bg-[#2563eb] text-white py-4 px-2 rounded-l-md font-bold text-sm tracking-widest writing-mode-vertical hover:bg-[#1d4ed8] transition-colors shadow-lg" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
           CALL FOR PAPERS
         </Link>
 
         {/* Left Dark Blue Overlay Box */}
         <div className="relative z-10 container-page h-full flex items-center">
-          <div className="w-full max-w-[650px] bg-transparent p-6 md:p-10 md:pt-16 relative z-10">
+          <div className="w-full max-w-[650px] bg-transparent px-4 py-24 sm:px-6 md:py-10 md:px-10 md:pt-16 relative z-10">
             
             {/* Green top-left corner accent to mimic image's swoosh from header (optional, but requested exactness so we focus on the box content) */}
             
@@ -149,12 +149,11 @@ function Home() {
             </div>
             
             <div className="text-[11.5px] md:text-[13px] font-bold tracking-[0.15em] text-white/90 uppercase mb-4 leading-relaxed">
-              Insightonix Global Insights Journal
+              WELCOME TO Insightonix
             </div>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-[56px] leading-[1.15] font-bold leading-[1.1] text-white mb-4">
-              Global <br />
-              <span className="text-[#3b82f6]">Insights, Trends</span> <br />
-              and Analytics
+            <h1 className="font-serif text-[32px] sm:text-4xl md:text-5xl lg:text-[56px] leading-[1.25] md:leading-[1.15] font-bold text-white mb-6 drop-shadow-lg">
+              Insightonix <br />
+              <span className="text-[#3b82f6]">Global Insights Journal</span>
             </h1>
             
             <p className="text-white/90 text-[15px] leading-relaxed mb-8 max-w-lg md:text-[17px]">
