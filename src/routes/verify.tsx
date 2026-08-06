@@ -6,7 +6,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { SiteLayout } from "@/components/site/site-layout";
 import { PageHero } from "@/components/site/page-hero";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
-import { CheckCircle2, ShieldAlert, Search, Award, Calendar, User, Building2, FileText } from "lucide-react";
+import {
+  CheckCircle2,
+  ShieldAlert,
+  Search,
+  Award,
+  Calendar,
+  User,
+  Building2,
+  FileText,
+} from "lucide-react";
 import { z } from "zod";
 
 const searchSchema = z.object({ id: z.string().optional() });
@@ -30,9 +39,15 @@ export const Route = createFileRoute("/verify")({
   head: () => ({
     meta: [
       { title: "Verify a Certificate — INSIGHTONIX" },
-      { name: "description", content: "Verify the authenticity of any INSIGHTONIX certificate by its tracking number." },
+      {
+        name: "description",
+        content: "Verify the authenticity of any INSIGHTONIX certificate by its tracking number.",
+      },
       { property: "og:title", content: "Verify a Certificate — INSIGHTONIX" },
-      { property: "og:description", content: "Verify INSIGHTONIX publication, reviewer, and conference certificates." },
+      {
+        property: "og:description",
+        content: "Verify INSIGHTONIX publication, reviewer, and conference certificates.",
+      },
     ],
     links: [{ rel: "canonical", href: "/verify" }],
   }),
@@ -115,10 +130,13 @@ function NotFoundState({ id }: { id: string }) {
           <ShieldAlert className="h-5 w-5" />
         </div>
         <div>
-          <h2 className="font-serif text-xl font-semibold text-destructive">Certificate not found</h2>
+          <h2 className="font-serif text-xl font-semibold text-destructive">
+            Certificate not found
+          </h2>
           <p className="mt-1 text-sm text-muted-foreground">
             No certificate exists with tracking number{" "}
-            <code className="rounded bg-background px-1.5 py-0.5 text-xs">{id}</code>. Please double-check the value.
+            <code className="rounded bg-background px-1.5 py-0.5 text-xs">{id}</code>. Please
+            double-check the value.
           </p>
         </div>
       </div>
@@ -129,7 +147,9 @@ function NotFoundState({ id }: { id: string }) {
 function CertificateCard({ cert }: { cert: Record<string, unknown> }) {
   const valid = cert.is_valid !== false;
   return (
-    <article className={`rounded-2xl border ${valid ? "border-brand/40 bg-brand-muted/30" : "border-destructive/40 bg-destructive/5"} p-8 shadow-elev`}>
+    <article
+      className={`rounded-2xl border ${valid ? "border-brand/40 bg-brand-muted/30" : "border-destructive/40 bg-destructive/5"} p-8 shadow-elev`}
+    >
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           {valid ? (
@@ -158,9 +178,21 @@ function CertificateCard({ cert }: { cert: Record<string, unknown> }) {
       <dl className="mt-6 grid gap-4 sm:grid-cols-2">
         <Item icon={Award} k="Title" v={cert.title as string} />
         <Item icon={User} k="Recipient" v={cert.recipient_name as string} />
-        {cert.recipient_affiliation ? <Item icon={Building2} k="Affiliation" v={cert.recipient_affiliation as string} /> : null}
-        <Item icon={Calendar} k="Issued on" v={new Date(cert.issue_date as string).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })} />
-        {cert.article_id ? <Item icon={FileText} k="Article" v={String(cert.article_id).slice(0, 8) + "…"} /> : null}
+        {cert.recipient_affiliation ? (
+          <Item icon={Building2} k="Affiliation" v={cert.recipient_affiliation as string} />
+        ) : null}
+        <Item
+          icon={Calendar}
+          k="Issued on"
+          v={new Date(cert.issue_date as string).toLocaleDateString(undefined, {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        />
+        {cert.article_id ? (
+          <Item icon={FileText} k="Article" v={String(cert.article_id).slice(0, 8) + "…"} />
+        ) : null}
       </dl>
 
       {!valid && cert.revoke_reason ? (
@@ -172,7 +204,15 @@ function CertificateCard({ cert }: { cert: Record<string, unknown> }) {
   );
 }
 
-function Item({ icon: Icon, k, v }: { icon: React.ComponentType<{ className?: string }>; k: string; v: string }) {
+function Item({
+  icon: Icon,
+  k,
+  v,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  k: string;
+  v: string;
+}) {
   return (
     <div className="flex items-start gap-3">
       <div className="mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-md bg-brand-muted text-brand">

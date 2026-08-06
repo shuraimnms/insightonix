@@ -12,9 +12,16 @@ export const Route = createFileRoute("/submit-query")({
   head: () => ({
     meta: [
       { title: "Submit a Query — INSIGHTONIX" },
-      { name: "description", content: "Send a structured query to the INSIGHTONIX editorial or technical team and get a reply within two working days." },
+      {
+        name: "description",
+        content:
+          "Send a structured query to the INSIGHTONIX editorial or technical team and get a reply within two working days.",
+      },
       { property: "og:title", content: "Submit a Query — INSIGHTONIX" },
-      { property: "og:description", content: "Structured intake for author, reviewer, and reader queries." },
+      {
+        property: "og:description",
+        content: "Structured intake for author, reviewer, and reader queries.",
+      },
     ],
     links: [{ rel: "canonical", href: "/submit-query" }],
   }),
@@ -72,7 +79,9 @@ function SubmitQuery() {
         intro="Send a structured question to the editorial or technical team. We reply within two working days, Monday to Saturday."
       />
       <div className="container-page py-12">
-        <Breadcrumbs trail={[{ label: "Support", to: "/technical-support" }, { label: "Submit a Query" }]} />
+        <Breadcrumbs
+          trail={[{ label: "Support", to: "/technical-support" }, { label: "Submit a Query" }]}
+        />
 
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
           <form onSubmit={onSubmit} className="rounded-2xl border border-border bg-card p-6 lg:p-8">
@@ -81,23 +90,59 @@ function SubmitQuery() {
 
             <div className="mt-6 grid gap-5 sm:grid-cols-2">
               <Field label="Full name" name="name" required placeholder="Dr. Aisha Rahman" />
-              <Field label="Email" name="email" type="email" required placeholder="you@institution.edu" />
+              <Field
+                label="Email"
+                name="email"
+                type="email"
+                required
+                placeholder="you@institution.edu"
+              />
               <div className="sm:col-span-2">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Topic *</label>
-                <select name="topic" required className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand">
-                  {TOPICS.map((t) => <option key={t}>{t}</option>)}
+                <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Topic *
+                </label>
+                <select
+                  name="topic"
+                  required
+                  className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+                >
+                  {TOPICS.map((t) => (
+                    <option key={t}>{t}</option>
+                  ))}
                 </select>
               </div>
-              <Field label="Submission ID (if any)" name="submission_id" placeholder="INSIGHTONIX-2026-0123" />
+              <Field
+                label="Submission ID (if any)"
+                name="submission_id"
+                placeholder="INSIGHTONIX-2026-0123"
+              />
               <div className="sm:col-span-2">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">Message *</label>
-                <textarea name="message" required rows={6} placeholder="Please describe your query in detail." className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand" />
+                <label className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Message *
+                </label>
+                <textarea
+                  name="message"
+                  required
+                  rows={6}
+                  placeholder="Please describe your query in detail."
+                  className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+                />
               </div>
             </div>
 
             <div className="mt-6 flex items-center justify-between gap-4">
-              <p className="text-xs text-muted-foreground">By submitting you agree to our <a href="/privacy" className="text-brand hover:underline">privacy policy</a>.</p>
-              <button type="submit" disabled={loading} className="inline-flex h-11 items-center gap-2 rounded-md bg-brand px-5 text-sm font-semibold text-brand-foreground shadow-elev hover:brightness-110 disabled:opacity-60">
+              <p className="text-xs text-muted-foreground">
+                By submitting you agree to our{" "}
+                <a href="/privacy" className="text-brand hover:underline">
+                  privacy policy
+                </a>
+                .
+              </p>
+              <button
+                type="submit"
+                disabled={loading}
+                className="inline-flex h-11 items-center gap-2 rounded-md bg-brand px-5 text-sm font-semibold text-brand-foreground shadow-elev hover:brightness-110 disabled:opacity-60"
+              >
                 {sent ? <CheckCircle2 className="h-4 w-4" /> : <Send className="h-4 w-4" />}
                 {loading ? "Sending…" : sent ? "Sent" : "Send query"}
               </button>
@@ -106,21 +151,40 @@ function SubmitQuery() {
 
           <aside className="space-y-6">
             <div className="rounded-2xl border border-brand/30 bg-gradient-to-br from-brand-muted/40 to-background p-6">
-              <div className="text-xs uppercase tracking-[0.2em] text-brand font-semibold">Response times</div>
+              <div className="text-xs uppercase tracking-[0.2em] text-brand font-semibold">
+                Response times
+              </div>
               <div className="mt-2 rule-gold" />
               <ul className="mt-4 space-y-2 text-sm">
-                <li className="flex justify-between"><span className="text-muted-foreground">First reply</span><span className="font-semibold">≤ 48 hrs</span></li>
-                <li className="flex justify-between"><span className="text-muted-foreground">Ethics review</span><span className="font-semibold">5 days</span></li>
-                <li className="flex justify-between"><span className="text-muted-foreground">Certificate re-issue</span><span className="font-semibold">3 days</span></li>
+                <li className="flex justify-between">
+                  <span className="text-muted-foreground">First reply</span>
+                  <span className="font-semibold">≤ 48 hrs</span>
+                </li>
+                <li className="flex justify-between">
+                  <span className="text-muted-foreground">Ethics review</span>
+                  <span className="font-semibold">5 days</span>
+                </li>
+                <li className="flex justify-between">
+                  <span className="text-muted-foreground">Certificate re-issue</span>
+                  <span className="font-semibold">3 days</span>
+                </li>
               </ul>
             </div>
             <div className="rounded-2xl border border-border bg-card p-6">
-              <div className="text-xs uppercase tracking-[0.2em] text-brand font-semibold">Direct email</div>
+              <div className="text-xs uppercase tracking-[0.2em] text-brand font-semibold">
+                Direct email
+              </div>
               <div className="mt-2 rule-gold" />
               <p className="mt-4 text-sm text-muted-foreground">
-                Editorial: <a href="mailto:editorial@insightonix.com" className="text-brand hover:underline">editorial@insightonix.com</a>
+                Editorial:{" "}
+                <a href="mailto:editorial@insightonix.com" className="text-brand hover:underline">
+                  editorial@insightonix.com
+                </a>
                 <br />
-                Support: <a href="mailto:support@insightonix.com" className="text-brand hover:underline">support@insightonix.com</a>
+                Support:{" "}
+                <a href="mailto:support@insightonix.com" className="text-brand hover:underline">
+                  support@insightonix.com
+                </a>
               </p>
             </div>
           </aside>
@@ -140,11 +204,32 @@ function SubmitQuery() {
   );
 }
 
-function Field({ label, name, type = "text", required, placeholder }: { label: string; name: string; type?: string; required?: boolean; placeholder?: string }) {
+function Field({
+  label,
+  name,
+  type = "text",
+  required,
+  placeholder,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  required?: boolean;
+  placeholder?: string;
+}) {
   return (
     <label className="block">
-      <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">{label}{required ? " *" : ""}</span>
-      <input name={name} type={type} required={required} placeholder={placeholder} className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand" />
+      <span className="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        {label}
+        {required ? " *" : ""}
+      </span>
+      <input
+        name={name}
+        type={type}
+        required={required}
+        placeholder={placeholder}
+        className="mt-2 w-full rounded-md border border-input bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+      />
     </label>
   );
 }

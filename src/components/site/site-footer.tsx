@@ -14,7 +14,11 @@ export function SiteFooter() {
     const { error } = await supabase.from("subscribers").insert({ email: email.trim() });
     setBusy(false);
     if (error) {
-      toast.error(error.message.includes("duplicate") ? "You're already subscribed." : "Could not subscribe. Check your email.");
+      toast.error(
+        error.message.includes("duplicate")
+          ? "You're already subscribed."
+          : "Could not subscribe. Check your email.",
+      );
     } else {
       toast.success("Subscribed. Thank you!");
       setEmail("");
@@ -28,7 +32,8 @@ export function SiteFooter() {
           <div className="font-serif text-xl font-semibold">{JOURNAL.short}</div>
           <p className="mt-2 max-w-md text-sm text-muted-foreground">{JOURNAL.tagline}</p>
           <p className="mt-4 text-xs text-muted-foreground">
-            ISSN (Online) {JOURNAL.issn_online} · ISSN (Print) {JOURNAL.issn_print} · {JOURNAL.license}
+            ISSN (Online) {JOURNAL.issn_online} · ISSN (Print) {JOURNAL.issn_print} ·{" "}
+            {JOURNAL.license}
           </p>
           <p className="mt-2 text-xs text-muted-foreground">{JOURNAL.address}</p>
         </div>
@@ -37,26 +42,60 @@ export function SiteFooter() {
           <div>
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Journal</div>
             <ul className="mt-3 space-y-2">
-              <li><Link to="/about" className="hover:text-brand">About</Link></li>
-              <li><Link to="/aims-scope" className="hover:text-brand">Aims & Scope</Link></li>
-              <li><Link to="/editorial-board" className="hover:text-brand">Editorial Board</Link></li>
-              <li><Link to="/archives" className="hover:text-brand">Archives</Link></li>
+              <li>
+                <Link to="/about" className="hover:text-brand">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/aims-scope" className="hover:text-brand">
+                  Aims & Scope
+                </Link>
+              </li>
+              <li>
+                <Link to="/editorial-board" className="hover:text-brand">
+                  Editorial Board
+                </Link>
+              </li>
+              <li>
+                <Link to="/archives" className="hover:text-brand">
+                  Archives
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
             <div className="text-xs uppercase tracking-wider text-muted-foreground">Authors</div>
             <ul className="mt-3 space-y-2">
-              <li><Link to="/submission-guidelines" className="hover:text-brand">Submission</Link></li>
-              <li><Link to="/author-guidelines" className="hover:text-brand">Guidelines</Link></li>
-              <li><Link to="/publication-ethics" className="hover:text-brand">Ethics</Link></li>
-              <li><Link to="/apc" className="hover:text-brand">APC</Link></li>
+              <li>
+                <Link to="/submission-guidelines" className="hover:text-brand">
+                  Submission
+                </Link>
+              </li>
+              <li>
+                <Link to="/author-guidelines" className="hover:text-brand">
+                  Guidelines
+                </Link>
+              </li>
+              <li>
+                <Link to="/publication-ethics" className="hover:text-brand">
+                  Ethics
+                </Link>
+              </li>
+              <li>
+                <Link to="/apc" className="hover:text-brand">
+                  APC
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>
 
         <div>
           <div className="text-xs uppercase tracking-wider text-muted-foreground">Stay updated</div>
-          <p className="mt-3 text-sm text-muted-foreground">Get new-issue alerts and calls for papers.</p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Get new-issue alerts and calls for papers.
+          </p>
           <form onSubmit={subscribe} className="mt-3 flex gap-2">
             <input
               type="email"
@@ -79,11 +118,19 @@ export function SiteFooter() {
 
       <div className="border-t border-border">
         <div className="container-page flex flex-col gap-2 py-5 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <div>© {new Date().getFullYear()} {JOURNAL.name}. All rights reserved.</div>
+          <div>
+            © {new Date().getFullYear()} {JOURNAL.name}. All rights reserved.
+          </div>
           <div className="flex gap-4">
-            <Link to="/privacy" className="hover:text-brand">Privacy</Link>
-            <Link to="/terms" className="hover:text-brand">Terms</Link>
-            <Link to="/contact" className="hover:text-brand">Contact</Link>
+            <Link to="/privacy" className="hover:text-brand">
+              Privacy
+            </Link>
+            <Link to="/terms" className="hover:text-brand">
+              Terms
+            </Link>
+            <Link to="/contact" className="hover:text-brand">
+              Contact
+            </Link>
           </div>
         </div>
       </div>

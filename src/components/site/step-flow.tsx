@@ -36,7 +36,7 @@ export function StepFlow({ steps, stagger = 0.45, variant = "compact" }: Props) 
           }
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
     io.observe(ref.current);
     return () => io.disconnect();
@@ -56,7 +56,9 @@ export function StepFlow({ steps, stagger = 0.45, variant = "compact" }: Props) 
                 className={`flex ${variant === "detailed" ? "w-40" : "w-32"} flex-col items-center px-1 text-center opacity-0`}
                 style={
                   active
-                    ? { animation: `insightonix-step-pop 0.55s cubic-bezier(0.34,1.56,0.64,1) ${nodeDelay} both` }
+                    ? {
+                        animation: `insightonix-step-pop 0.55s cubic-bezier(0.34,1.56,0.64,1) ${nodeDelay} both`,
+                      }
                     : undefined
                 }
               >
@@ -99,7 +101,8 @@ export function StepFlow({ steps, stagger = 0.45, variant = "compact" }: Props) 
                   className="mt-8 hidden shrink-0 items-center md:flex"
                   style={{ width: variant === "detailed" ? "3rem" : "2.25rem" }}
                 >
-                  <div className="relative h-[2px] w-full origin-left opacity-0"
+                  <div
+                    className="relative h-[2px] w-full origin-left opacity-0"
                     style={
                       active
                         ? {

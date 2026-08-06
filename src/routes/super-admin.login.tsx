@@ -8,7 +8,10 @@ export const Route = createFileRoute("/super-admin/login")({
   head: () => ({
     meta: [
       { title: "Super Admin Portal — INSIGHTONIX" },
-      { name: "description", content: "Centralized journal global research system. Authorized administrators only." },
+      {
+        name: "description",
+        content: "Centralized journal global research system. Authorized administrators only.",
+      },
       { name: "robots", content: "noindex,nofollow" },
     ],
   }),
@@ -26,9 +29,14 @@ function SuperAdminLogin() {
   // If already a super admin, jump straight in.
   useEffect(() => {
     (async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       if (!user) return;
-      const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", user.id);
+      const { data: roles } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id);
       if (roles?.some((r) => r.role === "super_admin")) {
         nav({ to: "/super-admin/dashboard", replace: true });
       }
@@ -40,9 +48,15 @@ function SuperAdminLogin() {
     setError(null);
     setBusy(true);
     try {
-      const { data, error: signErr } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      const { data, error: signErr } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
       if (signErr || !data.user) throw new Error(signErr?.message ?? "Sign-in failed");
-      const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", data.user.id);
+      const { data: roles } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", data.user.id);
       if (!roles?.some((r) => r.role === "super_admin")) {
         await supabase.auth.signOut();
         throw new Error("This portal is restricted to Super Admins.");
@@ -86,14 +100,22 @@ function SuperAdminLogin() {
           <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 shadow-lg shadow-amber-500/30">
             <Shield className="h-7 w-7 text-white" />
           </div>
-          <div className="mt-4 text-xs font-semibold uppercase tracking-[0.25em] text-amber-400">Super Admin Portal</div>
-          <h1 className="mt-2 font-serif text-2xl font-semibold text-white">Centralized Journal Global Research</h1>
-          <p className="mt-1 text-sm text-slate-400">Sign in to manage every journal from one console.</p>
+          <div className="mt-4 text-xs font-semibold uppercase tracking-[0.25em] text-amber-400">
+            Super Admin Portal
+          </div>
+          <h1 className="mt-2 font-serif text-2xl font-semibold text-white">
+            Centralized Journal Global Research
+          </h1>
+          <p className="mt-1 text-sm text-slate-400">
+            Sign in to manage every journal from one console.
+          </p>
         </div>
 
         <form onSubmit={submit} className="mt-8 space-y-4">
           <label className="block">
-            <div className="mb-1.5 text-xs font-medium uppercase tracking-wider text-slate-400">Email</div>
+            <div className="mb-1.5 text-xs font-medium uppercase tracking-wider text-slate-400">
+              Email
+            </div>
             <input
               type="email"
               required
@@ -105,7 +127,9 @@ function SuperAdminLogin() {
             />
           </label>
           <label className="block">
-            <div className="mb-1.5 text-xs font-medium uppercase tracking-wider text-slate-400">Password</div>
+            <div className="mb-1.5 text-xs font-medium uppercase tracking-wider text-slate-400">
+              Password
+            </div>
             <div className="relative">
               <input
                 type={show ? "text" : "password"}
@@ -128,7 +152,9 @@ function SuperAdminLogin() {
           </label>
 
           {error ? (
-            <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">{error}</div>
+            <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+              {error}
+            </div>
           ) : null}
 
           <button

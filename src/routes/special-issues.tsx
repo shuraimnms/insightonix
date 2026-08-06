@@ -13,5 +13,7 @@ export const Route = createFileRoute("/special-issues")({
     links: [{ rel: "canonical", href: "/special-issues" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("special-issues")),
-  component: () => <ContentPage slug="special-issues" title="Special Issues" crumb="Special Issues" />,
+  component: () => (
+    <ContentPage slug="special-issues" title="Special Issues" crumb="Special Issues" />
+  ),
 });

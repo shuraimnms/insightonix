@@ -4,7 +4,13 @@ import { cn } from "@/lib/utils";
 
 export type FAQ = { q: string; a: string };
 
-export function FAQSection({ title = "Frequently asked questions", items }: { title?: string; items: FAQ[] }) {
+export function FAQSection({
+  title = "Frequently asked questions",
+  items,
+}: {
+  title?: string;
+  items: FAQ[];
+}) {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section className="rounded-2xl border border-border bg-card p-6 lg:p-10">
@@ -22,7 +28,12 @@ export function FAQSection({ title = "Frequently asked questions", items }: { ti
                   aria-expanded={isOpen}
                 >
                   <span className="font-serif text-base font-semibold text-foreground">{it.q}</span>
-                  <ChevronDown className={cn("h-4 w-4 flex-none text-muted-foreground transition-transform", isOpen && "rotate-180 text-brand")} />
+                  <ChevronDown
+                    className={cn(
+                      "h-4 w-4 flex-none text-muted-foreground transition-transform",
+                      isOpen && "rotate-180 text-brand",
+                    )}
+                  />
                 </button>
               </dt>
               {isOpen ? (

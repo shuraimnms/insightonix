@@ -13,7 +13,11 @@ export const Route = createFileRoute("/reviewers")({
   head: () => ({
     meta: [
       { title: "Reviewer Board — INSIGHTONIX" },
-      { name: "description", content: "Search the standing peer-review panel of INSIGHTONIX — expert reviewers across multidisciplinary and global research, drawn from institutions worldwide." },
+      {
+        name: "description",
+        content:
+          "Search the standing peer-review panel of INSIGHTONIX — expert reviewers across multidisciplinary and global research, drawn from institutions worldwide.",
+      },
       { property: "og:title", content: "Reviewer Board — INSIGHTONIX" },
       { property: "og:description", content: "Our standing peer-review panel." },
     ],
@@ -38,7 +42,8 @@ function Reviewers() {
     return all.filter((r) => {
       if (country && r.country !== country) return false;
       if (!q) return true;
-      const hay = `${r.name} ${r.affiliation ?? ""} ${r.title ?? ""} ${r.country ?? ""}`.toLowerCase();
+      const hay =
+        `${r.name} ${r.affiliation ?? ""} ${r.title ?? ""} ${r.country ?? ""}`.toLowerCase();
       return hay.includes(q.toLowerCase());
     });
   }, [all, q, country]);
@@ -51,7 +56,9 @@ function Reviewers() {
         intro="Every published article in INSIGHTONIX has passed through the hands of at least two independent, double-blind peer reviewers drawn from this standing panel."
       />
       <div className="container-page py-12">
-        <Breadcrumbs trail={[{ label: "Editorial Team", to: "/editorial-board" }, { label: "Reviewers" }]} />
+        <Breadcrumbs
+          trail={[{ label: "Editorial Team", to: "/editorial-board" }, { label: "Reviewers" }]}
+        />
 
         {/* Stats strip */}
         <section className="grid gap-4 rounded-2xl border border-border bg-card p-6 sm:grid-cols-3">
@@ -81,11 +88,14 @@ function Reviewers() {
             >
               <option value="">All countries</option>
               {countries.map((c) => (
-                <option key={c} value={c}>{c}</option>
+                <option key={c} value={c}>
+                  {c}
+                </option>
               ))}
             </select>
             <div className="text-xs text-muted-foreground">
-              Showing <span className="font-semibold text-foreground">{filtered.length}</span> of {all.length}
+              Showing <span className="font-semibold text-foreground">{filtered.length}</span> of{" "}
+              {all.length}
             </div>
           </div>
 
@@ -108,7 +118,15 @@ function Reviewers() {
   );
 }
 
-function Kpi({ icon: Icon, v, l }: { icon: React.ComponentType<{ className?: string }>; v: number; l: string }) {
+function Kpi({
+  icon: Icon,
+  v,
+  l,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  v: number;
+  l: string;
+}) {
   return (
     <div className="flex items-center gap-4">
       <div className="flex h-11 w-11 items-center justify-center rounded-md bg-brand-muted text-brand">

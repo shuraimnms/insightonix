@@ -4,7 +4,16 @@ import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { registerArticleDoi, updateDoiStatus } from "@/lib/doi.functions";
-import { Fingerprint, ExternalLink, Loader2, RefreshCw, Copy, CheckCircle2, Clock, XCircle } from "lucide-react";
+import {
+  Fingerprint,
+  ExternalLink,
+  Loader2,
+  RefreshCw,
+  Copy,
+  CheckCircle2,
+  Clock,
+  XCircle,
+} from "lucide-react";
 import type { Database } from "@/integrations/supabase/types";
 
 type Article = Pick<
@@ -19,7 +28,11 @@ export const Route = createFileRoute("/_authenticated/admin/doi")({
 
 const statusChip: Record<string, { label: string; cls: string; icon: typeof CheckCircle2 }> = {
   registered: { label: "Registered", cls: "bg-brand-muted text-brand", icon: CheckCircle2 },
-  pending: { label: "Pending", cls: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300", icon: Clock },
+  pending: {
+    label: "Pending",
+    cls: "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
+    icon: Clock,
+  },
   failed: { label: "Failed", cls: "bg-destructive/10 text-destructive", icon: XCircle },
   none: { label: "No DOI", cls: "bg-muted text-muted-foreground", icon: Fingerprint },
 };
@@ -42,7 +55,11 @@ function DoiAdmin() {
         .select("id, slug, title, status, doi, doi_status, doi_url, doi_registered_at")
         .eq("status", "published")
         .order("published_at", { ascending: false }),
-      supabase.from("crossref_submissions").select("*").order("created_at", { ascending: false }).limit(50),
+      supabase
+        .from("crossref_submissions")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(50),
     ]);
     setArticles(arts ?? []);
     setSubmissions(subs ?? []);
@@ -90,10 +107,16 @@ function DoiAdmin() {
           <div className="text-xs uppercase tracking-widest text-brand font-semibold">Metadata</div>
           <h1 className="mt-1 font-serif text-2xl font-semibold">DOI & Crossref</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Mint DOIs for published articles and track Crossref deposit history. Format: <code className="rounded bg-muted px-1.5 py-0.5 text-xs">10.63001/insightonix.&lt;slug&gt;</code>
+            Mint DOIs for published articles and track Crossref deposit history. Format:{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
+              10.63001/insightonix.&lt;slug&gt;
+            </code>
           </p>
         </div>
-        <button onClick={load} className="inline-flex h-9 items-center gap-2 rounded-md border border-border bg-background px-3 text-sm hover:bg-accent">
+        <button
+          onClick={load}
+          className="inline-flex h-9 items-center gap-2 rounded-md border border-border bg-background px-3 text-sm hover:bg-accent"
+        >
           <RefreshCw className="h-4 w-4" /> Refresh
         </button>
       </header>
@@ -146,7 +169,9 @@ function DoiAdmin() {
                       <div className="mt-0.5 font-mono text-xs text-muted-foreground">{a.slug}</div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${chip.cls}`}>
+                      <span
+                        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold ${chip.cls}`}
+                      >
                         <Icon className="h-3 w-3" /> {chip.label}
                       </span>
                     </td>
@@ -193,7 +218,11 @@ function DoiAdmin() {
                             disabled={busyId === a.id}
                             className="inline-flex h-8 items-center gap-1 rounded-md bg-brand px-3 text-xs font-semibold text-brand-foreground disabled:opacity-60"
                           >
-                            {busyId === a.id ? <Loader2 className="h-3 w-3 animate-spin" /> : <Fingerprint className="h-3 w-3" />}
+                            {busyId === a.id ? (
+                              <Loader2 className="h-3 w-3 animate-spin" />
+                            ) : (
+                              <Fingerprint className="h-3 w-3" />
+                            )}
                             Register
                           </button>
                         ) : (
@@ -224,7 +253,9 @@ function DoiAdmin() {
 
       <section className="mt-10">
         <h2 className="font-serif text-lg font-semibold">Recent Crossref submissions</h2>
-        <p className="mt-1 text-sm text-muted-foreground">Latest 50 deposit attempts, newest first.</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Latest 50 deposit attempts, newest first.
+        </p>
         <div className="mt-4 overflow-x-auto rounded-xl border border-border bg-card">
           <table className="w-full text-sm">
             <thead className="border-b border-border bg-secondary/50 text-left text-xs uppercase tracking-wider text-muted-foreground">

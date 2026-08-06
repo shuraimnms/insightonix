@@ -27,9 +27,14 @@ export const registerArticleDoi = createServerFn({ method: "POST" })
       .maybeSingle();
     if (aErr) throw new Error(aErr.message);
     if (!article) throw new Error("Article not found.");
-    if (article.status !== "published") throw new Error("Only published articles can receive a DOI.");
+    if (article.status !== "published")
+      throw new Error("Only published articles can receive a DOI.");
 
-    const doi = (data.doi?.trim() || article.doi || `${DOI_PREFIX}/insightonix.${article.slug}`).toLowerCase();
+    const doi = (
+      data.doi?.trim() ||
+      article.doi ||
+      `${DOI_PREFIX}/insightonix.${article.slug}`
+    ).toLowerCase();
     const doi_url = `https://doi.org/${doi}`;
     const now = new Date().toISOString();
 

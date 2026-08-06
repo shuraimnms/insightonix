@@ -9,9 +9,16 @@ export const Route = createFileRoute("/publication-timeline")({
   head: () => ({
     meta: [
       { title: "Publication Frequency — INSIGHTONIX" },
-      { name: "description", content: "INSIGHTONIX publishes four regular quarterly issues every year — March, June, September, and December — with occasional special and theme-based issues." },
+      {
+        name: "description",
+        content:
+          "INSIGHTONIX publishes four regular quarterly issues every year — March, June, September, and December — with occasional special and theme-based issues.",
+      },
       { property: "og:title", content: "Publication Frequency — INSIGHTONIX" },
-      { property: "og:description", content: "Quarterly publication schedule and special-issue policy of INSIGHTONIX." },
+      {
+        property: "og:description",
+        content: "Quarterly publication schedule and special-issue policy of INSIGHTONIX.",
+      },
     ],
     links: [{ rel: "canonical", href: "/publication-timeline" }],
   }),
@@ -49,24 +56,32 @@ function Timeline() {
         intro="INSIGHTONIX normally publishes four regular issues every year on a quarterly basis."
       />
       <div className="container-page py-12">
-        <Breadcrumbs trail={[{ label: "About", to: "/about" }, { label: "Publication Frequency" }]} />
+        <Breadcrumbs
+          trail={[{ label: "About", to: "/about" }, { label: "Publication Frequency" }]}
+        />
 
         <section>
           <h2 className="font-serif text-2xl font-semibold">Regular issues</h2>
           <div className="mt-2 rule-gold" />
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {ISSUES.map(([name, month]) => (
-              <article key={name} className="rounded-xl border border-border bg-card p-6 text-center">
+              <article
+                key={name}
+                className="rounded-xl border border-border bg-card p-6 text-center"
+              >
                 <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-brand-muted text-brand">
                   <CalendarDays className="h-5 w-5" />
                 </div>
                 <div className="mt-4 font-serif text-lg font-semibold">{name}</div>
-                <div className="mt-1 text-sm text-brand font-semibold uppercase tracking-wider">{month}</div>
+                <div className="mt-1 text-sm text-brand font-semibold uppercase tracking-wider">
+                  {month}
+                </div>
               </article>
             ))}
           </div>
           <p className="mt-4 rounded-md border border-border bg-secondary/40 p-4 text-sm text-muted-foreground">
-            The exact date of publication within each scheduled month may depend upon completion of peer review, revision, copyediting, proofreading, formatting, and editorial approval.
+            The exact date of publication within each scheduled month may depend upon completion of
+            peer review, revision, copyediting, proofreading, formatting, and editorial approval.
           </p>
         </section>
 
@@ -76,14 +91,18 @@ function Timeline() {
           <p className="mt-3 text-sm text-muted-foreground">INSIGHTONIX may also publish:</p>
           <ul className="mt-3 grid gap-2 sm:grid-cols-2">
             {SPECIAL.map((s) => (
-              <li key={s} className="flex items-start gap-2 rounded-md border border-border bg-card p-3 text-sm">
+              <li
+                key={s}
+                className="flex items-start gap-2 rounded-md border border-border bg-card p-3 text-sm"
+              >
                 <span className="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-brand" />
                 <span>{s}</span>
               </li>
             ))}
           </ul>
           <p className="mt-4 text-sm text-muted-foreground">
-            Such issues shall be published only with editorial approval and must follow the journal's peer-review, ethical, plagiarism, authorship, and publication requirements.
+            Such issues shall be published only with editorial approval and must follow the
+            journal's peer-review, ethical, plagiarism, authorship, and publication requirements.
           </p>
         </section>
 

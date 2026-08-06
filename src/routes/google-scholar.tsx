@@ -13,5 +13,7 @@ export const Route = createFileRoute("/google-scholar")({
     links: [{ rel: "canonical", href: "/google-scholar" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("google-scholar")),
-  component: () => <ContentPage slug="google-scholar" title="Google Scholar" crumb="Google Scholar" />,
+  component: () => (
+    <ContentPage slug="google-scholar" title="Google Scholar" crumb="Google Scholar" />
+  ),
 });

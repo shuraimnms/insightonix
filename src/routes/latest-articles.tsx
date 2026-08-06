@@ -6,7 +6,11 @@ export const Route = createFileRoute("/latest-articles")({
   head: () => ({
     meta: [
       { title: "Latest Articles — INSIGHTONIX" },
-      { name: "description", content: "Recently published, peer-reviewed research from INSIGHTONIX in multidisciplinary, global research, finance, marketing, HRM, and allied disciplines." },
+      {
+        name: "description",
+        content:
+          "Recently published, peer-reviewed research from INSIGHTONIX in multidisciplinary, global research, finance, marketing, HRM, and allied disciplines.",
+      },
       { property: "og:title", content: "Latest Articles — INSIGHTONIX" },
       { property: "og:description", content: "The newest open-access research from INSIGHTONIX." },
     ],

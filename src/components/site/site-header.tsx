@@ -101,8 +101,6 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-
-
           {/* Mobile toggle */}
           <button
             type="button"
@@ -116,7 +114,11 @@ export function SiteHeader() {
         </div>
       </header>
 
-      <MobileDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} pathname={location.pathname} />
+      <MobileDrawer
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        pathname={location.pathname}
+      />
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
@@ -157,11 +159,15 @@ function NavItem({
     />
   );
 
-
   if (onSearchClick) {
     return (
       <li>
-        <button type="button" onClick={onSearchClick} className={baseCls} style={active ? { color: "var(--gold)" } : undefined}>
+        <button
+          type="button"
+          onClick={onSearchClick}
+          className={baseCls}
+          style={active ? { color: "var(--gold)" } : undefined}
+        >
           {label}
           {underline}
         </button>
@@ -186,11 +192,7 @@ function NavItem({
   }
 
   return (
-    <li
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
+    <li className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       <button
         type="button"
         aria-haspopup="true"

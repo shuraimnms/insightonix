@@ -33,7 +33,11 @@ export function ContentPage({
   crumb: string;
   intro?: string;
   eyebrow?: string;
-  highlights?: { icon?: React.ComponentType<{ className?: string }>; title: string; body: string }[];
+  highlights?: {
+    icon?: React.ComponentType<{ className?: string }>;
+    title: string;
+    body: string;
+  }[];
   quickLinks?: QuickLink[];
 }) {
   const { data: page } = useSuspenseQuery(pageQuery(slug));
@@ -56,7 +60,12 @@ export function ContentPage({
             </aside>
           </div>
         ) : (
-          <PremiumFallback title={page?.title ?? title} intro={pageIntro} highlights={highlights} quickLinks={quickLinks} />
+          <PremiumFallback
+            title={page?.title ?? title}
+            intro={pageIntro}
+            highlights={highlights}
+            quickLinks={quickLinks}
+          />
         )}
       </div>
     </SiteLayout>
@@ -64,9 +73,21 @@ export function ContentPage({
 }
 
 const DEFAULT_HIGHLIGHTS = [
-  { icon: ShieldCheck, title: "Peer-reviewed & indexed", body: "Every article undergoes double-blind peer review and is assigned a permanent DOI on publication." },
-  { icon: BookOpen, title: "Open access, no paywall", body: "Readers worldwide can freely download, share, and cite — under a permissive CC BY licence." },
-  { icon: Sparkles, title: "Fast, transparent workflow", body: "Editorial acknowledgement within 48 hours; first decision typically within 4–6 weeks." },
+  {
+    icon: ShieldCheck,
+    title: "Peer-reviewed & indexed",
+    body: "Every article undergoes double-blind peer review and is assigned a permanent DOI on publication.",
+  },
+  {
+    icon: BookOpen,
+    title: "Open access, no paywall",
+    body: "Readers worldwide can freely download, share, and cite — under a permissive CC BY licence.",
+  },
+  {
+    icon: Sparkles,
+    title: "Fast, transparent workflow",
+    body: "Editorial acknowledgement within 48 hours; first decision typically within 4–6 weeks.",
+  },
 ];
 
 function PremiumFallback({
@@ -77,14 +98,21 @@ function PremiumFallback({
 }: {
   title: string;
   intro?: string;
-  highlights?: { icon?: React.ComponentType<{ className?: string }>; title: string; body: string }[];
+  highlights?: {
+    icon?: React.ComponentType<{ className?: string }>;
+    title: string;
+    body: string;
+  }[];
   quickLinks: QuickLink[];
 }) {
   return (
     <div className="mt-2 grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
       <div className="min-w-0 space-y-10">
         <section className="relative overflow-hidden rounded-2xl border border-brand/30 bg-gradient-to-br from-brand-muted/50 via-background to-background p-8 lg:p-10">
-          <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-brand/10 blur-3xl" aria-hidden />
+          <div
+            className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-brand/10 blur-3xl"
+            aria-hidden
+          />
           <div className="relative">
             <div className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-background/70 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand">
               <Sparkles className="h-3.5 w-3.5" /> Section overview
@@ -103,7 +131,10 @@ function PremiumFallback({
           <div className="mt-2 rule-gold" />
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {highlights.map((h) => (
-              <article key={h.title} className="group rounded-xl border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-elev">
+              <article
+                key={h.title}
+                className="group rounded-xl border border-border bg-card p-5 transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-elev"
+              >
                 {h.icon ? (
                   <div className="flex h-10 w-10 items-center justify-center rounded-md bg-brand-muted text-brand transition group-hover:bg-brand group-hover:text-brand-foreground">
                     <h.icon className="h-5 w-5" />
@@ -120,7 +151,11 @@ function PremiumFallback({
           <h3 className="font-serif text-2xl font-semibold">Editorial commitment</h3>
           <div className="mt-2 rule-gold" />
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            INSIGHTONIX is committed to transparent, ethical, and internationally-benchmarked academic publishing across multidisciplinary and global research disciplines. Every policy on this site aligns with COPE guidelines, the DOAJ principles of transparency, and best practice for double-blind peer review. If a specific point on this page is not yet addressed, our editorial office will respond within two working days.
+            INSIGHTONIX is committed to transparent, ethical, and internationally-benchmarked
+            academic publishing across multidisciplinary and global research disciplines. Every
+            policy on this site aligns with COPE guidelines, the DOAJ principles of transparency,
+            and best practice for double-blind peer review. If a specific point on this page is not
+            yet addressed, our editorial office will respond within two working days.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -160,8 +195,12 @@ function QuickLinksCard({ links }: { links: QuickLink[] }) {
               className="group flex items-start justify-between gap-3 rounded-lg border border-transparent px-3 py-2 hover:border-brand/30 hover:bg-brand-muted/30"
             >
               <span>
-                <span className="block font-serif text-sm font-semibold text-foreground">{l.label}</span>
-                {l.hint ? <span className="block text-xs text-muted-foreground">{l.hint}</span> : null}
+                <span className="block font-serif text-sm font-semibold text-foreground">
+                  {l.label}
+                </span>
+                {l.hint ? (
+                  <span className="block text-xs text-muted-foreground">{l.hint}</span>
+                ) : null}
               </span>
               <ArrowRight className="mt-1 h-4 w-4 flex-none text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-brand" />
             </Link>

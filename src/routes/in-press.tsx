@@ -6,9 +6,16 @@ export const Route = createFileRoute("/in-press")({
   head: () => ({
     meta: [
       { title: "Articles In Press — INSIGHTONIX" },
-      { name: "description", content: "Accepted INSIGHTONIX manuscripts in final production, awaiting issue assignment and DOI registration." },
+      {
+        name: "description",
+        content:
+          "Accepted INSIGHTONIX manuscripts in final production, awaiting issue assignment and DOI registration.",
+      },
       { property: "og:title", content: "Articles In Press — INSIGHTONIX" },
-      { property: "og:description", content: "Peer-reviewed manuscripts in final production at INSIGHTONIX." },
+      {
+        property: "og:description",
+        content: "Peer-reviewed manuscripts in final production at INSIGHTONIX.",
+      },
     ],
     links: [{ rel: "canonical", href: "/in-press" }],
   }),

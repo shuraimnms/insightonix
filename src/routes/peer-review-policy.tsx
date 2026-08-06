@@ -13,5 +13,7 @@ export const Route = createFileRoute("/peer-review-policy")({
     links: [{ rel: "canonical", href: "/peer-review-policy" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("peer-review-policy")),
-  component: () => <ContentPage slug="peer-review-policy" title="Peer Review Policy" crumb="Peer Review" />,
+  component: () => (
+    <ContentPage slug="peer-review-policy" title="Peer Review Policy" crumb="Peer Review" />
+  ),
 });

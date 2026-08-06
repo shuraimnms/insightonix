@@ -1,7 +1,13 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-export type SiteRow = { id: string; name: string; code: string; domain: string | null; is_active: boolean };
+export type SiteRow = {
+  id: string;
+  name: string;
+  code: string;
+  domain: string | null;
+  is_active: boolean;
+};
 
 type Ctx = {
   activeSiteId: string | null;
@@ -42,7 +48,9 @@ export function SuperAdminProvider({ children }: { children: ReactNode }) {
     setLoading(false);
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const setActiveSiteId = (id: string) => {
     setActive(id);
@@ -52,7 +60,9 @@ export function SuperAdminProvider({ children }: { children: ReactNode }) {
   const activeSite = sites.find((s) => s.id === activeSiteId) ?? null;
 
   return (
-    <SuperAdminContext.Provider value={{ activeSiteId, activeSite, sites, loading, setActiveSiteId, refresh: load }}>
+    <SuperAdminContext.Provider
+      value={{ activeSiteId, activeSite, sites, loading, setActiveSiteId, refresh: load }}
+    >
       {children}
     </SuperAdminContext.Provider>
   );

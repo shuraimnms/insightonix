@@ -6,10 +6,15 @@ export function MaintenanceBanner() {
   const [msg, setMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.from("settings").select("value").eq("key", "maintenance").maybeSingle().then(({ data }) => {
-      const v = data?.value as { enabled?: boolean; message?: string } | null;
-      if (v?.enabled) setMsg(v.message ?? "Site is under maintenance.");
-    });
+    supabase
+      .from("settings")
+      .select("value")
+      .eq("key", "maintenance")
+      .maybeSingle()
+      .then(({ data }) => {
+        const v = data?.value as { enabled?: boolean; message?: string } | null;
+        if (v?.enabled) setMsg(v.message ?? "Site is under maintenance.");
+      });
   }, []);
 
   if (!msg) return null;

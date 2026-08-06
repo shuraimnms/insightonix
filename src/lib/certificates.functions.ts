@@ -19,7 +19,9 @@ export const issueCertificate = createServerFn({ method: "POST" })
   .inputValidator((raw) => IssueInput.parse(raw))
   .handler(async ({ data, context }) => {
     // Staff check
-    const { data: staffFlag, error: staffErr } = await context.supabase.rpc("is_staff", { _user_id: context.userId });
+    const { data: staffFlag, error: staffErr } = await context.supabase.rpc("is_staff", {
+      _user_id: context.userId,
+    });
     if (staffErr) throw new Error(staffErr.message);
     if (!staffFlag) throw new Error("Forbidden: only staff can issue certificates.");
 
@@ -33,7 +35,8 @@ export const issueCertificate = createServerFn({ method: "POST" })
         .maybeSingle();
       if (error) throw new Error(error.message);
       if (!article) throw new Error("Article not found.");
-      if (article.status !== "published") throw new Error("Certificate can only be issued for published articles.");
+      if (article.status !== "published")
+        throw new Error("Certificate can only be issued for published articles.");
     }
 
     // Duplicate check per (user_id, article_id)
@@ -50,8 +53,11 @@ export const issueCertificate = createServerFn({ method: "POST" })
 
     // Use service role to call the tracking-number generator (revoked from anon/authenticated).
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: trackingRow, error: tErr } = await supabaseAdmin.rpc("generate_certificate_tracking_no");
-    if (tErr || !trackingRow) throw new Error(tErr?.message ?? "Failed to generate tracking number.");
+    const { data: trackingRow, error: tErr } = await supabaseAdmin.rpc(
+      "generate_certificate_tracking_no",
+    );
+    if (tErr || !trackingRow)
+      throw new Error(tErr?.message ?? "Failed to generate tracking number.");
     const tracking_no = trackingRow as unknown as string;
 
     const insertRow = {
@@ -86,7 +92,9 @@ export const revokeCertificate = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((raw) => RevokeInput.parse(raw))
   .handler(async ({ data, context }) => {
-    const { data: staffFlag } = await context.supabase.rpc("is_staff", { _user_id: context.userId });
+    const { data: staffFlag } = await context.supabase.rpc("is_staff", {
+      _user_id: context.userId,
+    });
     if (!staffFlag) throw new Error("Forbidden.");
     const { error } = await context.supabase
       .from("certificates")

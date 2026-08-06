@@ -8,7 +8,10 @@ import { Download, Book } from "lucide-react";
 
 export const Route = createFileRoute("/ebooks")({
   head: () => ({
-    meta: [{ title: "E-Books — INSIGHTONIX" }, { name: "description", content: "Open-access e-books curated by INSIGHTONIX." }],
+    meta: [
+      { title: "E-Books — INSIGHTONIX" },
+      { name: "description", content: "Open-access e-books curated by INSIGHTONIX." },
+    ],
     links: [{ rel: "canonical", href: "/ebooks" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(ebooksQuery()),
@@ -19,7 +22,11 @@ function Ebooks() {
   const { data } = useSuspenseQuery(ebooksQuery());
   return (
     <SiteLayout>
-      <PageHero eyebrow="Library" title="E-Books" intro="Curated open-access volumes drawn from INSIGHTONIX research." />
+      <PageHero
+        eyebrow="Library"
+        title="E-Books"
+        intro="Curated open-access volumes drawn from INSIGHTONIX research."
+      />
       <div className="container-page py-12">
         <Breadcrumbs trail={[{ label: "E-Books" }]} />
         <div className="grid gap-4 md:grid-cols-2">
@@ -30,10 +37,15 @@ function Ebooks() {
               </div>
               <div className="min-w-0">
                 <h2 className="font-serif text-lg font-semibold leading-snug">{b.title}</h2>
-                <div className="mt-1 text-sm text-muted-foreground">{(b.authors as string[]).join(", ")}</div>
+                <div className="mt-1 text-sm text-muted-foreground">
+                  {(b.authors as string[]).join(", ")}
+                </div>
                 <p className="mt-3 text-sm text-muted-foreground">{b.description}</p>
                 {b.download_url ? (
-                  <a href={b.download_url} className="mt-4 inline-flex items-center gap-2 rounded-md bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground">
+                  <a
+                    href={b.download_url}
+                    className="mt-4 inline-flex items-center gap-2 rounded-md bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground"
+                  >
                     <Download className="h-4 w-4" /> Download PDF
                   </a>
                 ) : null}

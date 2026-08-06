@@ -12,6 +12,13 @@ export const Route = createFileRoute("/author-declaration-form")({
     ],
     links: [{ rel: "canonical", href: "/author-declaration-form" }],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("author-declaration-form")),
-  component: () => <ContentPage slug="author-declaration-form" title="Author Declaration Form" crumb="Declaration" />,
+  loader: ({ context }) =>
+    context.queryClient.ensureQueryData(pageQuery("author-declaration-form")),
+  component: () => (
+    <ContentPage
+      slug="author-declaration-form"
+      title="Author Declaration Form"
+      crumb="Declaration"
+    />
+  ),
 });

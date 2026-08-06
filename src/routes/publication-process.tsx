@@ -4,16 +4,33 @@ import { PageHero } from "@/components/site/page-hero";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { FAQSection } from "@/components/site/faq-section";
-import { UploadCloud, ShieldCheck, Users, MessageSquare, FileCheck2, BookOpen, Hash, Award, Clock } from "lucide-react";
+import {
+  UploadCloud,
+  ShieldCheck,
+  Users,
+  MessageSquare,
+  FileCheck2,
+  BookOpen,
+  Hash,
+  Award,
+  Clock,
+} from "lucide-react";
 import { StepFlow } from "@/components/site/step-flow";
 
 export const Route = createFileRoute("/publication-process")({
   head: () => ({
     meta: [
       { title: "Publication Process — INSIGHTONIX" },
-      { name: "description", content: "The end-to-end INSIGHTONIX publication journey: submission, editorial screening, double-blind review, decision, production, DOI registration, and post-publication support." },
+      {
+        name: "description",
+        content:
+          "The end-to-end INSIGHTONIX publication journey: submission, editorial screening, double-blind review, decision, production, DOI registration, and post-publication support.",
+      },
       { property: "og:title", content: "Publication Process — INSIGHTONIX" },
-      { property: "og:description", content: "The eight-step editorial workflow from submission to indexing." },
+      {
+        property: "og:description",
+        content: "The eight-step editorial workflow from submission to indexing.",
+      },
     ],
     links: [{ rel: "canonical", href: "/publication-process" }],
   }),
@@ -21,14 +38,54 @@ export const Route = createFileRoute("/publication-process")({
 });
 
 const STEPS = [
-  { icon: UploadCloud, title: "Submission", sla: "Day 0", body: "Upload anonymised manuscript, title page, and declarations via the online submission workflow. Acknowledgement email within 48 hours." },
-  { icon: ShieldCheck, title: "Editorial screening", sla: "Day 1–7", body: "Scope, structure, language, and similarity check (≤15% via iThenticate). Out-of-scope or under-prepared work is desk-rejected transparently." },
-  { icon: Users, title: "Double-blind peer review", sla: "Week 2–6", body: "Two independent expert reviewers evaluate originality, methodology, contribution, and clarity. A third reviewer is added when opinions diverge." },
-  { icon: MessageSquare, title: "First decision", sla: "Week 6–8", body: "Handling editor synthesises reviews and issues one of: Accept, Minor Revision, Major Revision, or Reject — with a full anonymised report." },
-  { icon: FileCheck2, title: "Revision & re-review", sla: "Week 8–12", body: "Authors submit a point-by-point response and revised manuscript. Revisions are re-evaluated by the original reviewers whenever possible." },
-  { icon: BookOpen, title: "Production & proofing", sla: "1–2 weeks", body: "Copy-editing, typesetting, figure clean-up, and reference validation. Authors approve the proof before final publication." },
-  { icon: Hash, title: "DOI & publication", sla: "Next issue", body: "Article is assigned a permanent Crossref DOI, deposited with full metadata, and published open access under CC BY." },
-  { icon: Award, title: "Indexing & certificate", sla: "Rolling", body: "Metadata is pushed to Google Scholar, Crossref, ROAD, and other partners. Authors receive a verifiable publication certificate." },
+  {
+    icon: UploadCloud,
+    title: "Submission",
+    sla: "Day 0",
+    body: "Upload anonymised manuscript, title page, and declarations via the online submission workflow. Acknowledgement email within 48 hours.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Editorial screening",
+    sla: "Day 1–7",
+    body: "Scope, structure, language, and similarity check (≤15% via iThenticate). Out-of-scope or under-prepared work is desk-rejected transparently.",
+  },
+  {
+    icon: Users,
+    title: "Double-blind peer review",
+    sla: "Week 2–6",
+    body: "Two independent expert reviewers evaluate originality, methodology, contribution, and clarity. A third reviewer is added when opinions diverge.",
+  },
+  {
+    icon: MessageSquare,
+    title: "First decision",
+    sla: "Week 6–8",
+    body: "Handling editor synthesises reviews and issues one of: Accept, Minor Revision, Major Revision, or Reject — with a full anonymised report.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Revision & re-review",
+    sla: "Week 8–12",
+    body: "Authors submit a point-by-point response and revised manuscript. Revisions are re-evaluated by the original reviewers whenever possible.",
+  },
+  {
+    icon: BookOpen,
+    title: "Production & proofing",
+    sla: "1–2 weeks",
+    body: "Copy-editing, typesetting, figure clean-up, and reference validation. Authors approve the proof before final publication.",
+  },
+  {
+    icon: Hash,
+    title: "DOI & publication",
+    sla: "Next issue",
+    body: "Article is assigned a permanent Crossref DOI, deposited with full metadata, and published open access under CC BY.",
+  },
+  {
+    icon: Award,
+    title: "Indexing & certificate",
+    sla: "Rolling",
+    body: "Metadata is pushed to Google Scholar, Crossref, ROAD, and other partners. Authors receive a verifiable publication certificate.",
+  },
 ];
 
 const SLAS = [
@@ -39,9 +96,18 @@ const SLAS = [
 ];
 
 const FAQS = [
-  { q: "How do I check the status of my submission?", a: "Log in to your author dashboard. Each stage — screening, review, decision, production — updates in real time and is emailed to the corresponding author." },
-  { q: "Can I withdraw a manuscript mid-review?", a: "Yes, until a decision is issued. Send a signed withdrawal request from all co-authors to the editorial office; withdrawal after acceptance is discouraged and may attract processing costs." },
-  { q: "What happens if reviewers disagree?", a: "The handling editor may invite an additional reviewer or make a considered decision based on the balance of the reports, always weighted toward rigour and reproducibility." },
+  {
+    q: "How do I check the status of my submission?",
+    a: "Log in to your author dashboard. Each stage — screening, review, decision, production — updates in real time and is emailed to the corresponding author.",
+  },
+  {
+    q: "Can I withdraw a manuscript mid-review?",
+    a: "Yes, until a decision is issued. Send a signed withdrawal request from all co-authors to the editorial office; withdrawal after acceptance is discouraged and may attract processing costs.",
+  },
+  {
+    q: "What happens if reviewers disagree?",
+    a: "The handling editor may invite an additional reviewer or make a considered decision based on the balance of the reports, always weighted toward rigour and reproducibility.",
+  },
 ];
 
 function Process() {
@@ -53,7 +119,12 @@ function Process() {
         intro="A transparent, service-level-driven pipeline designed to give authors fast, fair, and constructive decisions — without compromising on academic rigour."
       />
       <div className="container-page py-12">
-        <Breadcrumbs trail={[{ label: "For Authors", to: "/author-guidelines" }, { label: "Publication Process" }]} />
+        <Breadcrumbs
+          trail={[
+            { label: "For Authors", to: "/author-guidelines" },
+            { label: "Publication Process" },
+          ]}
+        />
 
         {/* SLA band */}
         <section className="rounded-2xl border border-brand/30 bg-gradient-to-br from-brand text-brand-foreground shadow-elev">
@@ -95,10 +166,14 @@ function Process() {
                 <article className="rounded-xl border border-border bg-card p-5 transition hover:border-brand/40 hover:shadow-elev">
                   <div className="flex flex-wrap items-baseline justify-between gap-2">
                     <div className="flex items-baseline gap-3">
-                      <span className="font-mono text-xs text-muted-foreground">Step {String(i + 1).padStart(2, "0")}</span>
+                      <span className="font-mono text-xs text-muted-foreground">
+                        Step {String(i + 1).padStart(2, "0")}
+                      </span>
                       <h4 className="font-serif text-xl font-semibold">{s.title}</h4>
                     </div>
-                    <span className="rounded-full border border-brand/30 bg-brand-muted/40 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-brand">{s.sla}</span>
+                    <span className="rounded-full border border-brand/30 bg-brand-muted/40 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-brand">
+                      {s.sla}
+                    </span>
                   </div>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
                 </article>

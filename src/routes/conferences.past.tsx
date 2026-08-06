@@ -10,16 +10,30 @@ export const Route = createFileRoute("/conferences/past")({
   head: () => ({
     meta: [
       { title: "Past Conferences (2015 – 2026) — INSIGHTONIX" },
-      { name: "description", content: "Archive of every INSIGHTONIX international conference and its published proceedings, from 2015 to 2026." },
+      {
+        name: "description",
+        content:
+          "Archive of every INSIGHTONIX international conference and its published proceedings, from 2015 to 2026.",
+      },
       { property: "og:title", content: "Past Conferences — INSIGHTONIX" },
-      { property: "og:description", content: "Year-wise tree of INSIGHTONIX conferences, venues, and conference proceedings volumes." },
+      {
+        property: "og:description",
+        content:
+          "Year-wise tree of INSIGHTONIX conferences, venues, and conference proceedings volumes.",
+      },
     ],
     links: [{ rel: "canonical", href: "/conferences/past" }],
   }),
   component: PastConferences,
 });
 
-type Conf = { n: number; title: string; date: string; venue: string; mode: "Physical + Online" | "Online" | "Physical" };
+type Conf = {
+  n: number;
+  title: string;
+  date: string;
+  venue: string;
+  mode: "Physical + Online" | "Online" | "Physical";
+};
 type YearBlock = { year: number; conferences: Conf[]; proceedings: string[] };
 
 const VENUES = [
@@ -42,12 +56,7 @@ const THEMES = [
   "Accounting, Auditing & Corporate Governance",
   "Emerging Trends in International Business",
 ];
-const MONTH_DATES = [
-  "15 – 16 February",
-  "20 – 21 May",
-  "18 – 19 August",
-  "12 – 13 November",
-];
+const MONTH_DATES = ["15 – 16 February", "20 – 21 May", "18 – 19 August", "12 – 13 November"];
 
 function build(): YearBlock[] {
   const blocks: YearBlock[] = [];
@@ -127,14 +136,18 @@ function YearBlockCard({ block, defaultOpen }: { block: YearBlock; defaultOpen?:
           <span className="font-serif text-2xl font-semibold">{block.year}</span>
         </span>
         <span className="text-xs uppercase tracking-widest opacity-90">
-          {block.conferences.length} conference{block.conferences.length > 1 ? "s" : ""} · {block.proceedings.length} proceedings
+          {block.conferences.length} conference{block.conferences.length > 1 ? "s" : ""} ·{" "}
+          {block.proceedings.length} proceedings
         </span>
       </button>
       {open ? (
         <div className="grid gap-6 p-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
           <ul className="space-y-3">
             {block.conferences.map((c) => (
-              <li key={c.n} className="rounded-lg border border-border bg-background p-4 transition hover:border-brand/50 hover:shadow-elev">
+              <li
+                key={c.n}
+                className="rounded-lg border border-border bg-background p-4 transition hover:border-brand/50 hover:shadow-elev"
+              >
                 <div className="flex items-start gap-3">
                   <span className="flex h-9 w-9 flex-none items-center justify-center rounded-md bg-brand-muted font-serif text-sm font-semibold text-brand">
                     {c.n}
@@ -142,12 +155,18 @@ function YearBlockCard({ block, defaultOpen }: { block: YearBlock; defaultOpen?:
                   <div className="min-w-0 flex-1">
                     <div className="font-serif text-base font-semibold leading-snug">{c.title}</div>
                     <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                      <span className="inline-flex items-center gap-1"><CalendarDays className="h-3.5 w-3.5" /> {c.date}</span>
-                      <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" /> {c.venue}</span>
-                      <span className={cn(
-                        "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
-                        "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",
-                      )}>
+                      <span className="inline-flex items-center gap-1">
+                        <CalendarDays className="h-3.5 w-3.5" /> {c.date}
+                      </span>
+                      <span className="inline-flex items-center gap-1">
+                        <MapPin className="h-3.5 w-3.5" /> {c.venue}
+                      </span>
+                      <span
+                        className={cn(
+                          "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider",
+                          "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",
+                        )}
+                      >
                         <Sparkles className="h-3 w-3" /> {c.mode}
                       </span>
                     </div>
@@ -157,7 +176,9 @@ function YearBlockCard({ block, defaultOpen }: { block: YearBlock; defaultOpen?:
             ))}
           </ul>
           <div className="rounded-lg border border-border bg-secondary/40 p-5">
-            <div className="text-xs uppercase tracking-wider font-semibold text-brand">Conference Proceedings</div>
+            <div className="text-xs uppercase tracking-wider font-semibold text-brand">
+              Conference Proceedings
+            </div>
             <ul className="mt-3 space-y-2">
               {block.proceedings.map((p) => (
                 <li key={p} className="flex items-start gap-2 rounded-md bg-background p-3 text-sm">
@@ -167,7 +188,8 @@ function YearBlockCard({ block, defaultOpen }: { block: YearBlock; defaultOpen?:
               ))}
             </ul>
             <p className="mt-4 text-xs text-muted-foreground">
-              Selected papers from each edition undergo double-blind peer review and are published as an INSIGHTONIX proceedings volume with individual DOIs.
+              Selected papers from each edition undergo double-blind peer review and are published
+              as an INSIGHTONIX proceedings volume with individual DOIs.
             </p>
           </div>
         </div>

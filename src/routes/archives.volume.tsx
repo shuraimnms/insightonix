@@ -13,5 +13,7 @@ export const Route = createFileRoute("/archives/volume")({
     links: [{ rel: "canonical", href: "/archives/volume" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("archives-volume")),
-  component: () => <ContentPage slug="archives-volume" title="Archives by Volume" crumb="By Volume" />,
+  component: () => (
+    <ContentPage slug="archives-volume" title="Archives by Volume" crumb="By Volume" />
+  ),
 });

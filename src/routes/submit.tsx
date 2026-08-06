@@ -10,7 +10,10 @@ import { CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/submit")({
   head: () => ({
-    meta: [{ title: "Submit a Manuscript — INSIGHTONIX" }, { name: "description", content: "Submit your manuscript to INSIGHTONIX for peer review." }],
+    meta: [
+      { title: "Submit a Manuscript — INSIGHTONIX" },
+      { name: "description", content: "Submit your manuscript to INSIGHTONIX for peer review." },
+    ],
     links: [{ rel: "canonical", href: "/submit" }],
   }),
   component: Submit,
@@ -21,7 +24,9 @@ const schema = z.object({
   abstract: z.string().trim().min(100).max(3000),
   keywords: z.string().trim().min(3).max(300),
   co_authors: z.string().trim().max(500),
-  plagiarism_confirmed: z.literal(true, { errorMap: () => ({ message: "Please confirm the plagiarism declaration." }) }),
+  plagiarism_confirmed: z.literal(true, {
+    errorMap: () => ({ message: "Please confirm the plagiarism declaration." }),
+  }),
 });
 
 function Submit() {
@@ -49,9 +54,18 @@ function Submit() {
   if (session === false) {
     return (
       <SiteLayout>
-        <PageHero eyebrow="Sign in required" title="Sign in to submit" intro="Manuscript submission requires an author account." />
+        <PageHero
+          eyebrow="Sign in required"
+          title="Sign in to submit"
+          intro="Manuscript submission requires an author account."
+        />
         <div className="container-page py-12">
-          <Link to="/auth" className="inline-flex h-11 items-center rounded-md bg-brand px-5 text-sm font-semibold text-brand-foreground">Go to sign in</Link>
+          <Link
+            to="/auth"
+            className="inline-flex h-11 items-center rounded-md bg-brand px-5 text-sm font-semibold text-brand-foreground"
+          >
+            Go to sign in
+          </Link>
         </div>
       </SiteLayout>
     );
@@ -60,19 +74,28 @@ function Submit() {
   const uploadTo = async (userId: string, prefix: string, file: File) => {
     const clean = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
     const path = `${userId}/${prefix}-${Date.now()}-${clean}`;
-    const { error } = await supabase.storage.from("manuscripts").upload(path, file, { upsert: false, contentType: file.type });
+    const { error } = await supabase.storage
+      .from("manuscripts")
+      .upload(path, file, { upsert: false, contentType: file.type });
     if (error) throw error;
     return path;
   };
 
   const submit = async () => {
     const parsed = schema.safeParse(f);
-    if (!parsed.success) return toast.error(parsed.error.errors[0]?.message ?? "Please complete the form.");
-    if (!manuscriptFile && !f.file_url) return toast.error("Please upload your manuscript PDF (or provide a URL).");
+    if (!parsed.success)
+      return toast.error(parsed.error.errors[0]?.message ?? "Please complete the form.");
+    if (!manuscriptFile && !f.file_url)
+      return toast.error("Please upload your manuscript PDF (or provide a URL).");
     setBusy(true);
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { setBusy(false); return toast.error("Session expired. Sign in again."); }
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        setBusy(false);
+        return toast.error("Session expired. Sign in again.");
+      }
 
       let manuscriptPath = f.file_url || null;
       let copyrightPath = f.copyright_form_url || null;
@@ -88,8 +111,14 @@ function Submit() {
       const { error } = await supabase.from("submissions").insert({
         title: f.title.trim(),
         abstract: f.abstract.trim(),
-        keywords: f.keywords.split(",").map((s) => s.trim()).filter(Boolean),
-        co_authors: f.co_authors.split(",").map((s) => s.trim()).filter(Boolean),
+        keywords: f.keywords
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean),
+        co_authors: f.co_authors
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean),
         author_id: user.id,
         file_url: manuscriptPath,
         copyright_form_url: copyrightPath,
@@ -108,18 +137,34 @@ function Submit() {
 
   return (
     <SiteLayout>
-      <PageHero eyebrow="Manuscript" title="Submit your paper" intro="Four short steps. Estimated time: 5 minutes." />
+      <PageHero
+        eyebrow="Manuscript"
+        title="Submit your paper"
+        intro="Four short steps. Estimated time: 5 minutes."
+      />
       <div className="container-page py-12">
         <Breadcrumbs trail={[{ label: "Submit" }]} />
 
         <ol className="mb-8 flex items-center gap-3 text-xs">
-          {["Metadata", "Manuscript file", "Copyright & ethics", "Review & submit"].map((label, i) => (
-            <li key={label} className="flex items-center gap-2">
-              <span className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold ${step > i + 1 ? "bg-brand text-brand-foreground" : step === i + 1 ? "bg-brand text-brand-foreground" : "bg-secondary text-muted-foreground"}`}>{step > i + 1 ? <CheckCircle2 className="h-4 w-4" /> : i + 1}</span>
-              <span className={step === i + 1 ? "text-foreground font-semibold" : "text-muted-foreground"}>{label}</span>
-              {i < 3 && <span className="w-8 h-px bg-border" />}
-            </li>
-          ))}
+          {["Metadata", "Manuscript file", "Copyright & ethics", "Review & submit"].map(
+            (label, i) => (
+              <li key={label} className="flex items-center gap-2">
+                <span
+                  className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold ${step > i + 1 ? "bg-brand text-brand-foreground" : step === i + 1 ? "bg-brand text-brand-foreground" : "bg-secondary text-muted-foreground"}`}
+                >
+                  {step > i + 1 ? <CheckCircle2 className="h-4 w-4" /> : i + 1}
+                </span>
+                <span
+                  className={
+                    step === i + 1 ? "text-foreground font-semibold" : "text-muted-foreground"
+                  }
+                >
+                  {label}
+                </span>
+                {i < 3 && <span className="w-8 h-px bg-border" />}
+              </li>
+            ),
+          )}
         </ol>
 
         <div className="rounded-xl border border-border bg-card p-6">
@@ -128,11 +173,14 @@ function Submit() {
               <Field label="Title" value={f.title} onChange={(v) => setF({ ...f, title: v })} />
               <div>
                 <div className="mb-1 flex items-center justify-between">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">Abstract (200–250 words)</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                    Abstract (200–250 words)
+                  </div>
                   <button
                     type="button"
                     onClick={async () => {
-                      if (f.abstract.trim().length < 50) return toast.error("Paste at least 50 characters first.");
+                      if (f.abstract.trim().length < 50)
+                        return toast.error("Paste at least 50 characters first.");
                       try {
                         const { extractManuscriptMetadata } = await import("@/lib/ai.functions");
                         toast.loading("Extracting with AI…", { id: "ai" });
@@ -155,45 +203,90 @@ function Submit() {
                     ✨ AI extract
                   </button>
                 </div>
-                <textarea rows={8} value={f.abstract} onChange={(e) => setF({ ...f, abstract: e.target.value })} className="w-full rounded-md border border-border bg-background p-3 text-sm outline-none focus:border-brand" />
+                <textarea
+                  rows={8}
+                  value={f.abstract}
+                  onChange={(e) => setF({ ...f, abstract: e.target.value })}
+                  className="w-full rounded-md border border-border bg-background p-3 text-sm outline-none focus:border-brand"
+                />
               </div>
-              <Field label="Keywords (comma separated)" value={f.keywords} onChange={(v) => setF({ ...f, keywords: v })} placeholder="e.g. ESG, cost of equity, India" />
-              <Field label="Co-authors (comma separated)" value={f.co_authors} onChange={(v) => setF({ ...f, co_authors: v })} />
+              <Field
+                label="Keywords (comma separated)"
+                value={f.keywords}
+                onChange={(v) => setF({ ...f, keywords: v })}
+                placeholder="e.g. ESG, cost of equity, India"
+              />
+              <Field
+                label="Co-authors (comma separated)"
+                value={f.co_authors}
+                onChange={(v) => setF({ ...f, co_authors: v })}
+              />
             </div>
           )}
           {step === 2 && (
             <div className="space-y-4">
               <div>
-                <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">Anonymised manuscript (PDF/DOCX, max 20MB)</div>
+                <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">
+                  Anonymised manuscript (PDF/DOCX, max 20MB)
+                </div>
                 <input
                   type="file"
                   accept=".pdf,.doc,.docx"
                   onChange={(e) => setManuscriptFile(e.target.files?.[0] ?? null)}
                   className="block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-brand file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-foreground hover:file:brightness-110"
                 />
-                {manuscriptFile ? <p className="mt-2 text-xs text-brand">Selected: {manuscriptFile.name} ({(manuscriptFile.size / 1024).toFixed(1)} KB)</p> : null}
+                {manuscriptFile ? (
+                  <p className="mt-2 text-xs text-brand">
+                    Selected: {manuscriptFile.name} ({(manuscriptFile.size / 1024).toFixed(1)} KB)
+                  </p>
+                ) : null}
               </div>
               <div className="rule-gold" />
-              <Field label="Or paste a link instead" value={f.file_url} onChange={(v) => setF({ ...f, file_url: v })} placeholder="https://…/manuscript.pdf" />
-              <p className="text-xs text-muted-foreground">Files are stored privately; only editors and assigned reviewers can access them.</p>
+              <Field
+                label="Or paste a link instead"
+                value={f.file_url}
+                onChange={(v) => setF({ ...f, file_url: v })}
+                placeholder="https://…/manuscript.pdf"
+              />
+              <p className="text-xs text-muted-foreground">
+                Files are stored privately; only editors and assigned reviewers can access them.
+              </p>
             </div>
           )}
           {step === 3 && (
             <div className="space-y-4">
               <div>
-                <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">Upload signed copyright form (optional here — required before publication)</div>
+                <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">
+                  Upload signed copyright form (optional here — required before publication)
+                </div>
                 <input
                   type="file"
                   accept=".pdf,image/*"
                   onChange={(e) => setCopyrightFile(e.target.files?.[0] ?? null)}
                   className="block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-brand file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-foreground hover:file:brightness-110"
                 />
-                {copyrightFile ? <p className="mt-2 text-xs text-brand">Selected: {copyrightFile.name}</p> : null}
+                {copyrightFile ? (
+                  <p className="mt-2 text-xs text-brand">Selected: {copyrightFile.name}</p>
+                ) : null}
               </div>
-              <p className="text-xs text-muted-foreground">Generate the form from the <Link to="/copyright-form" className="text-brand hover:underline">Copyright Form page</Link>.</p>
+              <p className="text-xs text-muted-foreground">
+                Generate the form from the{" "}
+                <Link to="/copyright-form" className="text-brand hover:underline">
+                  Copyright Form page
+                </Link>
+                .
+              </p>
               <label className="flex items-start gap-2 text-sm">
-                <input type="checkbox" checked={f.plagiarism_confirmed} onChange={(e) => setF({ ...f, plagiarism_confirmed: e.target.checked })} className="mt-1" />
-                <span>I confirm the manuscript's Turnitin similarity is below 15% (excluding references and quoted matter).</span>
+                <input
+                  type="checkbox"
+                  checked={f.plagiarism_confirmed}
+                  onChange={(e) => setF({ ...f, plagiarism_confirmed: e.target.checked })}
+                  className="mt-1"
+                />
+                <span>
+                  I confirm the manuscript's Turnitin similarity is below 15% (excluding references
+                  and quoted matter).
+                </span>
               </label>
             </div>
           )}
@@ -210,11 +303,26 @@ function Submit() {
           )}
 
           <div className="mt-8 flex justify-between">
-            <button disabled={step === 1} onClick={() => setStep(step - 1)} className="rounded-md border border-border px-4 py-2 text-sm disabled:opacity-40">Back</button>
+            <button
+              disabled={step === 1}
+              onClick={() => setStep(step - 1)}
+              className="rounded-md border border-border px-4 py-2 text-sm disabled:opacity-40"
+            >
+              Back
+            </button>
             {step < 4 ? (
-              <button onClick={() => setStep(step + 1)} className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground">Next</button>
+              <button
+                onClick={() => setStep(step + 1)}
+                className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground"
+              >
+                Next
+              </button>
             ) : (
-              <button disabled={busy} onClick={submit} className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground disabled:opacity-60">
+              <button
+                disabled={busy}
+                onClick={submit}
+                className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-brand-foreground disabled:opacity-60"
+              >
                 {uploading ? "Uploading files…" : busy ? "Submitting…" : "Submit manuscript"}
               </button>
             )}
@@ -225,11 +333,26 @@ function Submit() {
   );
 }
 
-function Field({ label, value, onChange, placeholder }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string }) {
+function Field({
+  label,
+  value,
+  onChange,
+  placeholder,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+}) {
   return (
     <label className="block">
       <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
-      <input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="h-11 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-brand" />
+      <input
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="h-11 w-full rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-brand"
+      />
     </label>
   );
 }

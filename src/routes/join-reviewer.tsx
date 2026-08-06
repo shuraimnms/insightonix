@@ -14,7 +14,11 @@ export const Route = createFileRoute("/join-reviewer")({
   head: () => ({
     meta: [
       { title: "Become a Peer Reviewer — INSIGHTONIX" },
-      { name: "description", content: "Apply to join the INSIGHTONIX standing peer-review panel. Recognised contributions, reviewer certificates, and priority consideration for editorial roles." },
+      {
+        name: "description",
+        content:
+          "Apply to join the INSIGHTONIX standing peer-review panel. Recognised contributions, reviewer certificates, and priority consideration for editorial roles.",
+      },
       { property: "og:title", content: "Join as Reviewer — INSIGHTONIX" },
       { property: "og:description", content: "Apply to review for INSIGHTONIX." },
     ],
@@ -24,10 +28,26 @@ export const Route = createFileRoute("/join-reviewer")({
 });
 
 const BENEFITS = [
-  { icon: Award, title: "Reviewer certificate", body: "A verifiable INSIGHTONIX-YYYY-#### certificate for every completed review, publicly verifiable on our /verify page." },
-  { icon: ShieldCheck, title: "Editorial recognition", body: "Top reviewers are invited to the annual Reviewer Honour Roll and considered for editorial appointments." },
-  { icon: Users, title: "Scholarly community", body: "Access to reviewer workshops, methods clinics, and networking with editors and authors across six continents." },
-  { icon: Clock, title: "Reasonable timelines", body: "Standard invitation windows of 21 days. Editors respect your workload and never over-assign." },
+  {
+    icon: Award,
+    title: "Reviewer certificate",
+    body: "A verifiable INSIGHTONIX-YYYY-#### certificate for every completed review, publicly verifiable on our /verify page.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Editorial recognition",
+    body: "Top reviewers are invited to the annual Reviewer Honour Roll and considered for editorial appointments.",
+  },
+  {
+    icon: Users,
+    title: "Scholarly community",
+    body: "Access to reviewer workshops, methods clinics, and networking with editors and authors across six continents.",
+  },
+  {
+    icon: Clock,
+    title: "Reasonable timelines",
+    body: "Standard invitation windows of 21 days. Editors respect your workload and never over-assign.",
+  },
 ];
 
 const CRITERIA = [
@@ -45,21 +65,44 @@ const schema = z.object({
   degree: z.string().trim().min(2).max(100),
   specialisms: z.string().trim().min(3, "List at least one specialism").max(400),
   publications: z.string().trim().min(3).max(200),
-  motivation: z.string().trim().min(50, "A short motivation (min 50 chars) helps us match you well").max(2000),
+  motivation: z
+    .string()
+    .trim()
+    .min(50, "A short motivation (min 50 chars) helps us match you well")
+    .max(2000),
   orcid: z.string().trim().max(50).optional(),
 });
 
 const FAQS = [
-  { q: "How many reviews will I be asked to complete?", a: "Typically 2–6 per year, depending on your specialism and availability. You are always free to decline any single invitation." },
-  { q: "Is there any compensation?", a: "Peer review is a voluntary service to the community. In return we provide certificates, discounted APCs on your own submissions, and formal recognition." },
-  { q: "How is my identity protected?", a: "INSIGHTONIX uses double-blind review. Author identity is stripped from manuscripts before you receive them, and your identity is never shared with the authors." },
-  { q: "When will I hear back?", a: "The editorial office reviews applications monthly. Successful applicants receive a reviewer welcome pack and are added to the standing panel." },
+  {
+    q: "How many reviews will I be asked to complete?",
+    a: "Typically 2–6 per year, depending on your specialism and availability. You are always free to decline any single invitation.",
+  },
+  {
+    q: "Is there any compensation?",
+    a: "Peer review is a voluntary service to the community. In return we provide certificates, discounted APCs on your own submissions, and formal recognition.",
+  },
+  {
+    q: "How is my identity protected?",
+    a: "INSIGHTONIX uses double-blind review. Author identity is stripped from manuscripts before you receive them, and your identity is never shared with the authors.",
+  },
+  {
+    q: "When will I hear back?",
+    a: "The editorial office reviews applications monthly. Successful applicants receive a reviewer welcome pack and are added to the standing panel.",
+  },
 ];
 
 function JoinReviewer() {
   const [f, setF] = useState({
-    full_name: "", email: "", affiliation: "", country: "", degree: "",
-    specialisms: "", publications: "", motivation: "", orcid: "",
+    full_name: "",
+    email: "",
+    affiliation: "",
+    country: "",
+    degree: "",
+    specialisms: "",
+    publications: "",
+    motivation: "",
+    orcid: "",
   });
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
@@ -69,7 +112,11 @@ function JoinReviewer() {
     supabase.auth.getUser().then(({ data }) => {
       const u = data.user;
       if (u && !f.email) {
-        setF((s) => ({ ...s, email: u.email ?? s.email, full_name: (u.user_metadata?.full_name as string) ?? s.full_name }));
+        setF((s) => ({
+          ...s,
+          email: u.email ?? s.email,
+          full_name: (u.user_metadata?.full_name as string) ?? s.full_name,
+        }));
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -78,7 +125,8 @@ function JoinReviewer() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = schema.safeParse(f);
-    if (!parsed.success) return toast.error(parsed.error.errors[0]?.message ?? "Please complete the form.");
+    if (!parsed.success)
+      return toast.error(parsed.error.errors[0]?.message ?? "Please complete the form.");
     setBusy(true);
     try {
       const { error } = await supabase.from("audit_log").insert({
@@ -88,7 +136,11 @@ function JoinReviewer() {
       });
       if (error) throw error;
       // Also subscribe email so the editorial office can follow up
-      await supabase.from("subscribers").insert({ email: parsed.data.email }).select().maybeSingle();
+      await supabase
+        .from("subscribers")
+        .insert({ email: parsed.data.email })
+        .select()
+        .maybeSingle();
       setDone(true);
       toast.success("Application received — we'll be in touch within 30 days.");
     } catch (err) {
@@ -106,7 +158,12 @@ function JoinReviewer() {
         intro="Help shape the scholarly record in multidisciplinary and global research. Rigorous, timely, double-blind peer review is the heart of what we do."
       />
       <div className="container-page py-12">
-        <Breadcrumbs trail={[{ label: "Editorial Team", to: "/editorial-board" }, { label: "Join as Reviewer" }]} />
+        <Breadcrumbs
+          trail={[
+            { label: "Editorial Team", to: "/editorial-board" },
+            { label: "Join as Reviewer" },
+          ]}
+        />
 
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {BENEFITS.map((b) => (
@@ -122,7 +179,9 @@ function JoinReviewer() {
 
         <section className="mt-16 grid gap-10 lg:grid-cols-[1fr_1.4fr]">
           <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-brand font-semibold">Who we're looking for</div>
+            <div className="text-xs uppercase tracking-[0.2em] text-brand font-semibold">
+              Who we're looking for
+            </div>
             <h2 className="mt-2 font-serif text-3xl font-semibold">Application criteria</h2>
             <div className="mt-2 rule-gold" />
             <ul className="mt-6 space-y-3 text-sm">
@@ -134,7 +193,8 @@ function JoinReviewer() {
               ))}
             </ul>
             <p className="mt-6 rounded-md border border-border bg-secondary/40 p-4 text-xs text-muted-foreground">
-              Early-career researchers with a strong publication record and a mentor's recommendation are warmly encouraged to apply.
+              Early-career researchers with a strong publication record and a mentor's
+              recommendation are warmly encouraged to apply.
             </p>
           </div>
 
@@ -144,30 +204,90 @@ function JoinReviewer() {
                 <CheckCircle2 className="mx-auto h-12 w-12 text-brand" />
                 <h3 className="mt-4 font-serif text-2xl font-semibold">Application received</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Thank you, {f.full_name}. Our editorial office reviews applications monthly and will reply to <span className="text-foreground font-medium">{f.email}</span> within 30 days.
+                  Thank you, {f.full_name}. Our editorial office reviews applications monthly and
+                  will reply to <span className="text-foreground font-medium">{f.email}</span>{" "}
+                  within 30 days.
                 </p>
                 <div className="mt-6 flex justify-center gap-3">
-                  <Link to="/reviewers" className="inline-flex h-10 items-center rounded-md border border-border bg-background px-4 text-sm font-semibold">Browse reviewer board</Link>
-                  <Link to="/" className="inline-flex h-10 items-center rounded-md bg-brand px-4 text-sm font-semibold text-brand-foreground">Back to home</Link>
+                  <Link
+                    to="/reviewers"
+                    className="inline-flex h-10 items-center rounded-md border border-border bg-background px-4 text-sm font-semibold"
+                  >
+                    Browse reviewer board
+                  </Link>
+                  <Link
+                    to="/"
+                    className="inline-flex h-10 items-center rounded-md bg-brand px-4 text-sm font-semibold text-brand-foreground"
+                  >
+                    Back to home
+                  </Link>
                 </div>
               </div>
             ) : (
-              <form onSubmit={submit} className="rounded-2xl border border-border bg-card p-6 lg:p-8">
+              <form
+                onSubmit={submit}
+                className="rounded-2xl border border-border bg-card p-6 lg:p-8"
+              >
                 <h2 className="font-serif text-2xl font-semibold">Reviewer application</h2>
                 <div className="mt-2 rule-gold" />
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  <Field label="Full name" value={f.full_name} onChange={(v) => setF({ ...f, full_name: v })} required />
-                  <Field label="Email" type="email" value={f.email} onChange={(v) => setF({ ...f, email: v })} required />
-                  <Field label="Affiliation / institution" value={f.affiliation} onChange={(v) => setF({ ...f, affiliation: v })} required />
-                  <Field label="Country" value={f.country} onChange={(v) => setF({ ...f, country: v })} required />
-                  <Field label="Highest degree" value={f.degree} onChange={(v) => setF({ ...f, degree: v })} placeholder="e.g. PhD, Finance" required />
-                  <Field label="ORCID (optional)" value={f.orcid} onChange={(v) => setF({ ...f, orcid: v })} placeholder="0000-0000-0000-0000" />
-                  <Field label="Specialisms" value={f.specialisms} onChange={(v) => setF({ ...f, specialisms: v })} placeholder="e.g. ESG, capital structure, panel econometrics" required />
-                  <Field label="Selected publications (Google Scholar URL or DOIs)" value={f.publications} onChange={(v) => setF({ ...f, publications: v })} required />
+                  <Field
+                    label="Full name"
+                    value={f.full_name}
+                    onChange={(v) => setF({ ...f, full_name: v })}
+                    required
+                  />
+                  <Field
+                    label="Email"
+                    type="email"
+                    value={f.email}
+                    onChange={(v) => setF({ ...f, email: v })}
+                    required
+                  />
+                  <Field
+                    label="Affiliation / institution"
+                    value={f.affiliation}
+                    onChange={(v) => setF({ ...f, affiliation: v })}
+                    required
+                  />
+                  <Field
+                    label="Country"
+                    value={f.country}
+                    onChange={(v) => setF({ ...f, country: v })}
+                    required
+                  />
+                  <Field
+                    label="Highest degree"
+                    value={f.degree}
+                    onChange={(v) => setF({ ...f, degree: v })}
+                    placeholder="e.g. PhD, Finance"
+                    required
+                  />
+                  <Field
+                    label="ORCID (optional)"
+                    value={f.orcid}
+                    onChange={(v) => setF({ ...f, orcid: v })}
+                    placeholder="0000-0000-0000-0000"
+                  />
+                  <Field
+                    label="Specialisms"
+                    value={f.specialisms}
+                    onChange={(v) => setF({ ...f, specialisms: v })}
+                    placeholder="e.g. ESG, capital structure, panel econometrics"
+                    required
+                  />
+                  <Field
+                    label="Selected publications (Google Scholar URL or DOIs)"
+                    value={f.publications}
+                    onChange={(v) => setF({ ...f, publications: v })}
+                    required
+                  />
                 </div>
                 <div className="mt-4">
                   <label className="block">
-                    <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">Why do you want to review for INSIGHTONIX?</div>
+                    <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">
+                      Why do you want to review for INSIGHTONIX?
+                    </div>
                     <textarea
                       rows={5}
                       value={f.motivation}
@@ -182,11 +302,18 @@ function JoinReviewer() {
                   disabled={busy}
                   className="mt-6 inline-flex h-11 items-center gap-2 rounded-md bg-brand px-6 text-sm font-semibold text-brand-foreground shadow-elev hover:brightness-110 disabled:opacity-60"
                 >
-                  {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                  {busy ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Send className="h-4 w-4" />
+                  )}
                   {busy ? "Submitting…" : "Submit application"}
                 </button>
                 <p className="mt-3 text-xs text-muted-foreground">
-                  By submitting, you agree to our <Link to="/publication-ethics" className="text-brand hover:underline">ethics policy</Link>{" "}
+                  By submitting, you agree to our{" "}
+                  <Link to="/publication-ethics" className="text-brand hover:underline">
+                    ethics policy
+                  </Link>{" "}
                   and confirm the information above is accurate.
                 </p>
               </form>
@@ -212,13 +339,26 @@ function JoinReviewer() {
 }
 
 function Field({
-  label, value, onChange, required, type = "text", placeholder,
+  label,
+  value,
+  onChange,
+  required,
+  type = "text",
+  placeholder,
 }: {
-  label: string; value: string; onChange: (v: string) => void; required?: boolean; type?: string; placeholder?: string;
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  required?: boolean;
+  type?: string;
+  placeholder?: string;
 }) {
   return (
     <label className="block">
-      <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">{label}{required ? " *" : ""}</div>
+      <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">
+        {label}
+        {required ? " *" : ""}
+      </div>
       <input
         type={type}
         value={value}

@@ -4,13 +4,27 @@ import { PageHero } from "@/components/site/page-hero";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { FAQSection } from "@/components/site/faq-section";
 import { CtaStrip } from "@/components/site/cta-strip";
-import { ShieldCheck, AlertTriangle, Users, FileText, BadgeAlert, Scale, Repeat, EyeOff, Ban } from "lucide-react";
+import {
+  ShieldCheck,
+  AlertTriangle,
+  Users,
+  FileText,
+  BadgeAlert,
+  Scale,
+  Repeat,
+  EyeOff,
+  Ban,
+} from "lucide-react";
 
 export const Route = createFileRoute("/publication-ethics")({
   head: () => ({
     meta: [
       { title: "Publication Ethics & Malpractice Statement — INSIGHTONIX" },
-      { name: "description", content: "INSIGHTONIX follows COPE guidelines for authorship, peer review, conflicts of interest, plagiarism, corrections, and retractions." },
+      {
+        name: "description",
+        content:
+          "INSIGHTONIX follows COPE guidelines for authorship, peer review, conflicts of interest, plagiarism, corrections, and retractions.",
+      },
       { property: "og:title", content: "Publication Ethics — INSIGHTONIX" },
       { property: "og:description", content: "COPE-aligned ethics and malpractice statement." },
     ],
@@ -53,18 +67,49 @@ const RESP = [
 ];
 
 const MISCONDUCT = [
-  { icon: EyeOff, title: "Plagiarism", body: "All submissions are screened with Turnitin. Similarity above 15% (excluding references/quoted matter) is grounds for immediate rejection." },
-  { icon: Repeat, title: "Duplicate submission", body: "Concurrent submission to multiple journals or re-publication of substantially similar work is not permitted." },
-  { icon: BadgeAlert, title: "Data fabrication", body: "Manipulated, invented, or selectively reported data results in rejection and possible institutional notification." },
-  { icon: Ban, title: "Authorship disputes", body: "Ghost, gift, and guest authorship are prohibited. Contributions should follow the CRediT taxonomy." },
+  {
+    icon: EyeOff,
+    title: "Plagiarism",
+    body: "All submissions are screened with Turnitin. Similarity above 15% (excluding references/quoted matter) is grounds for immediate rejection.",
+  },
+  {
+    icon: Repeat,
+    title: "Duplicate submission",
+    body: "Concurrent submission to multiple journals or re-publication of substantially similar work is not permitted.",
+  },
+  {
+    icon: BadgeAlert,
+    title: "Data fabrication",
+    body: "Manipulated, invented, or selectively reported data results in rejection and possible institutional notification.",
+  },
+  {
+    icon: Ban,
+    title: "Authorship disputes",
+    body: "Ghost, gift, and guest authorship are prohibited. Contributions should follow the CRediT taxonomy.",
+  },
 ];
 
 const FAQS = [
-  { q: "What is the correction and retraction policy?", a: "Minor errors trigger a corrigendum; substantial errors an erratum. Fraud, fabrication, or repeat plagiarism trigger a retraction per COPE guidelines with a permanent, linked retraction notice." },
-  { q: "How do you handle conflicts of interest?", a: "All authors and reviewers must declare financial and non-financial COIs at submission. Editors with a COI recuse; a co-editor handles the paper." },
-  { q: "Do you use AI-assisted screening?", a: "Yes — for plagiarism, statistical anomalies, and image manipulation. AI is a decision-support tool; a human editor makes every final call." },
-  { q: "Can I appeal an editorial decision?", a: "Yes. Send a written appeal to the Editor-in-Chief within 30 days of the decision. Appeals are handled by an editor who was not involved in the original decision." },
-  { q: "Are generative AI tools allowed in manuscripts?", a: "Authors may use generative AI for language polishing but must disclose its use. AI cannot be listed as an author and cannot produce novel scientific claims without human verification." },
+  {
+    q: "What is the correction and retraction policy?",
+    a: "Minor errors trigger a corrigendum; substantial errors an erratum. Fraud, fabrication, or repeat plagiarism trigger a retraction per COPE guidelines with a permanent, linked retraction notice.",
+  },
+  {
+    q: "How do you handle conflicts of interest?",
+    a: "All authors and reviewers must declare financial and non-financial COIs at submission. Editors with a COI recuse; a co-editor handles the paper.",
+  },
+  {
+    q: "Do you use AI-assisted screening?",
+    a: "Yes — for plagiarism, statistical anomalies, and image manipulation. AI is a decision-support tool; a human editor makes every final call.",
+  },
+  {
+    q: "Can I appeal an editorial decision?",
+    a: "Yes. Send a written appeal to the Editor-in-Chief within 30 days of the decision. Appeals are handled by an editor who was not involved in the original decision.",
+  },
+  {
+    q: "Are generative AI tools allowed in manuscripts?",
+    a: "Authors may use generative AI for language polishing but must disclose its use. AI cannot be listed as an author and cannot produce novel scientific claims without human verification.",
+  },
 ];
 
 function Ethics() {
@@ -113,7 +158,10 @@ function Ethics() {
           <div className="mt-2 rule-gold" />
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {MISCONDUCT.map((m) => (
-              <article key={m.title} className="rounded-xl border border-destructive/30 bg-destructive/5 p-6">
+              <article
+                key={m.title}
+                className="rounded-xl border border-destructive/30 bg-destructive/5 p-6"
+              >
                 <div className="flex h-10 w-10 items-center justify-center rounded-md bg-destructive text-destructive-foreground">
                   <m.icon className="h-5 w-5" />
                 </div>
@@ -128,17 +176,31 @@ function Ethics() {
         <section className="mt-16 rounded-2xl border border-border bg-card p-8">
           <div className="flex items-center gap-3">
             <Scale className="h-6 w-6 text-brand" />
-            <h2 className="font-serif text-2xl font-semibold">Corrections, expressions of concern & retractions</h2>
+            <h2 className="font-serif text-2xl font-semibold">
+              Corrections, expressions of concern & retractions
+            </h2>
           </div>
           <div className="mt-2 rule-gold" />
           <ol className="mt-6 space-y-4 text-sm">
             {[
-              ["Corrigendum", "Author-initiated correction of small factual errors that do not change the paper's conclusions."],
+              [
+                "Corrigendum",
+                "Author-initiated correction of small factual errors that do not change the paper's conclusions.",
+              ],
               ["Erratum", "Publisher-initiated correction of typesetting or production errors."],
-              ["Expression of concern", "Public notice that a paper is under investigation but not yet retracted."],
-              ["Retraction", "Full withdrawal of a paper due to major errors, misconduct, or invalid conclusions. Retracted articles remain visible with a clear notice."],
+              [
+                "Expression of concern",
+                "Public notice that a paper is under investigation but not yet retracted.",
+              ],
+              [
+                "Retraction",
+                "Full withdrawal of a paper due to major errors, misconduct, or invalid conclusions. Retracted articles remain visible with a clear notice.",
+              ],
             ].map(([k, v]) => (
-              <li key={k} className="grid gap-2 border-b border-dashed border-border pb-4 last:border-0 sm:grid-cols-[200px_1fr]">
+              <li
+                key={k}
+                className="grid gap-2 border-b border-dashed border-border pb-4 last:border-0 sm:grid-cols-[200px_1fr]"
+              >
                 <div className="font-serif font-semibold">{k}</div>
                 <div className="text-muted-foreground leading-relaxed">{v}</div>
               </li>

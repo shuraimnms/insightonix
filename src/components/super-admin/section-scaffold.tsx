@@ -19,7 +19,9 @@ export function SectionScaffold(props: {
     <div className="space-y-6">
       <header className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-amber-400">{props.eyebrow}</div>
+          <div className="text-[11px] font-semibold uppercase tracking-[0.25em] text-amber-400">
+            {props.eyebrow}
+          </div>
           <h1 className="mt-1 font-serif text-3xl font-semibold text-white">{props.title}</h1>
           <p className="mt-1 max-w-2xl text-sm text-slate-400">{props.description}</p>
           <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-slate-800 bg-slate-900 px-2.5 py-1 text-[11px] text-slate-400">
@@ -37,8 +39,12 @@ export function SectionScaffold(props: {
           className="group flex items-center justify-between rounded-xl border border-slate-800 bg-slate-900/60 p-4 hover:border-amber-500/40"
         >
           <div>
-            <div className="text-sm font-semibold text-white">{props.linkedAdminLabel ?? "Open in editorial console"}</div>
-            <div className="mt-0.5 text-xs text-slate-400">Full CRUD for this section lives in the classic /admin console. Opens in the same tab.</div>
+            <div className="text-sm font-semibold text-white">
+              {props.linkedAdminLabel ?? "Open in editorial console"}
+            </div>
+            <div className="mt-0.5 text-xs text-slate-400">
+              Full CRUD for this section lives in the classic /admin console. Opens in the same tab.
+            </div>
           </div>
           <ArrowUpRight className="h-5 w-5 text-slate-500 transition group-hover:text-amber-400" />
         </Link>
@@ -49,9 +55,12 @@ export function SectionScaffold(props: {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/10 text-amber-400">
             <Sparkles className="h-5 w-5" />
           </div>
-          <div className="mt-3 font-serif text-lg font-semibold text-white">Coming to Super Admin</div>
+          <div className="mt-3 font-serif text-lg font-semibold text-white">
+            Coming to Super Admin
+          </div>
           <p className="mx-auto mt-1 max-w-md text-sm text-slate-400">
-            This section is scaffolded and reachable. Cross-site global research lands here in the next pass — use the editorial console link above for now.
+            This section is scaffolded and reachable. Cross-site global research lands here in the
+            next pass — use the editorial console link above for now.
           </p>
         </div>
       )}

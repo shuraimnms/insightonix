@@ -12,7 +12,11 @@ export const Route = createFileRoute("/advisory-board")({
   head: () => ({
     meta: [
       { title: "International Advisory Board — INSIGHTONIX" },
-      { name: "description", content: "Senior scholars and practitioners advising INSIGHTONIX on strategic direction, ethics, and long-term editorial policy." },
+      {
+        name: "description",
+        content:
+          "Senior scholars and practitioners advising INSIGHTONIX on strategic direction, ethics, and long-term editorial policy.",
+      },
       { property: "og:title", content: "Advisory Board — INSIGHTONIX" },
       { property: "og:description", content: "Strategic advisors to INSIGHTONIX." },
     ],
@@ -23,9 +27,18 @@ export const Route = createFileRoute("/advisory-board")({
 });
 
 const FAQS = [
-  { q: "What does the advisory board do?", a: "The board advises on long-term editorial strategy, ethics policy, indexing partnerships, and the appointment of the Editor-in-Chief. It does not handle individual manuscripts." },
-  { q: "How are advisory board members selected?", a: "Members are invited by the Editor-in-Chief in consultation with existing advisors, on the basis of scholarly record, editorial experience, and international representation." },
-  { q: "How long do advisors serve?", a: "Three-year renewable terms with staggered rotation to ensure continuity and fresh perspectives." },
+  {
+    q: "What does the advisory board do?",
+    a: "The board advises on long-term editorial strategy, ethics policy, indexing partnerships, and the appointment of the Editor-in-Chief. It does not handle individual manuscripts.",
+  },
+  {
+    q: "How are advisory board members selected?",
+    a: "Members are invited by the Editor-in-Chief in consultation with existing advisors, on the basis of scholarly record, editorial experience, and international representation.",
+  },
+  {
+    q: "How long do advisors serve?",
+    a: "Three-year renewable terms with staggered rotation to ensure continuity and fresh perspectives.",
+  },
 ];
 
 function Advisory() {
@@ -40,10 +53,14 @@ function Advisory() {
         intro="Distinguished scholars and practitioners who shape INSIGHTONIX's long-term direction, ethics posture, and international presence."
       />
       <div className="container-page py-12">
-        <Breadcrumbs trail={[{ label: "Editorial Team", to: "/editorial-board" }, { label: "Advisory Board" }]} />
+        <Breadcrumbs
+          trail={[{ label: "Editorial Team", to: "/editorial-board" }, { label: "Advisory Board" }]}
+        />
 
         <section>
-          <h2 className="font-serif text-3xl font-semibold">{people.length} advisors · advising editorial strategy</h2>
+          <h2 className="font-serif text-3xl font-semibold">
+            {people.length} advisors · advising editorial strategy
+          </h2>
           <div className="mt-2 rule-gold" />
           <div className="mt-8">
             <PersonGrid people={people} />

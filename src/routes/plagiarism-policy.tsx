@@ -13,5 +13,7 @@ export const Route = createFileRoute("/plagiarism-policy")({
     links: [{ rel: "canonical", href: "/plagiarism-policy" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("plagiarism-policy")),
-  component: () => <ContentPage slug="plagiarism-policy" title="Plagiarism Policy" crumb="Plagiarism" />,
+  component: () => (
+    <ContentPage slug="plagiarism-policy" title="Plagiarism Policy" crumb="Plagiarism" />
+  ),
 });

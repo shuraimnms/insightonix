@@ -65,14 +65,23 @@ function Article() {
                 Vol. {issue.volume} · Issue {issue.number} · {issue.year}
               </div>
             ) : null}
-            <h1 className="mt-3 max-w-4xl font-serif text-3xl lg:text-4xl font-semibold leading-tight">{a.title}</h1>
-            <div className="mt-4 text-base text-muted-foreground">{(a.authors as string[]).join(", ")}</div>
+            <h1 className="mt-3 max-w-4xl font-serif text-3xl lg:text-4xl font-semibold leading-tight">
+              {a.title}
+            </h1>
+            <div className="mt-4 text-base text-muted-foreground">
+              {(a.authors as string[]).join(", ")}
+            </div>
             {(a.affiliations as string[]).length > 0 && (
-              <div className="mt-1 text-sm text-muted-foreground italic">{(a.affiliations as string[]).join(" · ")}</div>
+              <div className="mt-1 text-sm text-muted-foreground italic">
+                {(a.affiliations as string[]).join(" · ")}
+              </div>
             )}
             <div className="mt-6 flex flex-wrap gap-3">
               {a.pdf_url ? (
-                <a href={a.pdf_url} className="inline-flex h-10 items-center gap-2 rounded-md bg-brand px-4 text-sm font-semibold text-brand-foreground">
+                <a
+                  href={a.pdf_url}
+                  className="inline-flex h-10 items-center gap-2 rounded-md bg-brand px-4 text-sm font-semibold text-brand-foreground"
+                >
                   <Download className="h-4 w-4" /> Download PDF
                 </a>
               ) : (
@@ -116,7 +125,12 @@ function Article() {
             <div className="mt-2 rule-gold" />
             <div className="mt-4 flex flex-wrap gap-2">
               {(a.keywords as string[]).map((k) => (
-                <span key={k} className="rounded-full border border-border bg-secondary px-3 py-1 text-sm">{k}</span>
+                <span
+                  key={k}
+                  className="rounded-full border border-border bg-secondary px-3 py-1 text-sm"
+                >
+                  {k}
+                </span>
               ))}
             </div>
           </div>
@@ -126,29 +140,51 @@ function Article() {
               <div className="font-serif text-base font-semibold">Article metrics</div>
               <div className="mt-2 rule-gold" />
               <dl className="mt-4 grid grid-cols-3 gap-2 text-center">
-                <div><dt className="text-xs text-muted-foreground">Views</dt><dd className="font-serif text-xl">{a.view_count}</dd></div>
-                <div><dt className="text-xs text-muted-foreground">Downloads</dt><dd className="font-serif text-xl">{a.download_count}</dd></div>
-                <div><dt className="text-xs text-muted-foreground">Citations</dt><dd className="font-serif text-xl">{a.citation_count}</dd></div>
+                <div>
+                  <dt className="text-xs text-muted-foreground">Views</dt>
+                  <dd className="font-serif text-xl">{a.view_count}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs text-muted-foreground">Downloads</dt>
+                  <dd className="font-serif text-xl">{a.download_count}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs text-muted-foreground">Citations</dt>
+                  <dd className="font-serif text-xl">{a.citation_count}</dd>
+                </div>
               </dl>
             </div>
             <div className="rounded-xl border border-border bg-card p-5 text-sm">
               <div className="font-serif text-base font-semibold">Licence</div>
               <div className="mt-2 rule-gold" />
               <p className="mt-3 text-muted-foreground">
-                Published open access under CC BY-NC 4.0. Attribution required; non-commercial reuse allowed.
+                Published open access under CC BY-NC 4.0. Attribution required; non-commercial reuse
+                allowed.
               </p>
             </div>
-            <Link to="/articles" className="block text-sm text-brand hover:underline">← Back to all articles</Link>
+            <Link to="/articles" className="block text-sm text-brand hover:underline">
+              ← Back to all articles
+            </Link>
           </aside>
         </div>
       </article>
 
       {citeOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4" onClick={() => setCiteOpen(null)}>
-          <div className="w-full max-w-lg rounded-xl border border-border bg-popover p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/40 p-4"
+          onClick={() => setCiteOpen(null)}
+        >
+          <div
+            className="w-full max-w-lg rounded-xl border border-border bg-popover p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between">
-              <h3 className="font-serif text-lg font-semibold">Cite this article — {citeOpen.toUpperCase()}</h3>
-              <button onClick={() => setCiteOpen(null)} className="text-sm text-muted-foreground">Close</button>
+              <h3 className="font-serif text-lg font-semibold">
+                Cite this article — {citeOpen.toUpperCase()}
+              </h3>
+              <button onClick={() => setCiteOpen(null)} className="text-sm text-muted-foreground">
+                Close
+              </button>
             </div>
             <pre className="mt-4 max-h-64 overflow-auto rounded-md bg-secondary p-4 text-xs whitespace-pre-wrap">
               {citeOpen === "apa" ? apa : bibtex}

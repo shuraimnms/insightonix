@@ -12,42 +12,77 @@
   animation: insightonix-marquee-reverse 50s linear infinite;
 }
 @keyframes insightonix-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 @keyframes insightonix-marquee-reverse {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 @keyframes insightonix-orbit {
-  from { transform: rotate(0deg) translateX(var(--orbit-r, 120px)) rotate(0deg); }
-  to { transform: rotate(360deg) translateX(var(--orbit-r, 120px)) rotate(-360deg); }
+  from {
+    transform: rotate(0deg) translateX(var(--orbit-r, 120px)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(var(--orbit-r, 120px)) rotate(-360deg);
+  }
 }
 @utility animate-orbit {
   animation: insightonix-orbit 18s linear infinite;
 }
 @keyframes insightonix-float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 @utility animate-float {
   animation: insightonix-float 4s ease-in-out infinite;
 }
 
 @keyframes insightonix-step-pop {
-  0%   { opacity: 0; transform: scale(0.5) translateY(6px); }
-  60%  { opacity: 1; transform: scale(1.1) translateY(0); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(6px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 @keyframes insightonix-step-arrow {
-  from { opacity: 0; transform: scaleX(0); }
-  to   { opacity: 1; transform: scaleX(1); }
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 @keyframes insightonix-step-ring {
-  0%   { box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 70%, transparent); }
-  100% { box-shadow: 0 0 0 14px color-mix(in oklab, var(--gold) 0%, transparent); }
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 70%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 14px color-mix(in oklab, var(--gold) 0%, transparent);
+  }
 }
-
 
 @custom-variant dark (&:is(.dark *));
 
@@ -110,18 +145,18 @@
   --primary-foreground: oklch(0.98 0.005 260);
 
   --secondary: oklch(0.95 0.01 250);
-  --secondary-foreground: oklch(0.20 0.10 280);
+  --secondary-foreground: oklch(0.2 0.1 280);
 
   --muted: oklch(0.95 0.01 250);
   --muted-foreground: oklch(0.48 0.02 260);
 
-  --accent: oklch(0.60 0.15 150);
-  --accent-foreground: oklch(0.10 0.05 150);
+  --accent: oklch(0.6 0.15 150);
+  --accent-foreground: oklch(0.1 0.05 150);
 
   --destructive: oklch(0.57 0.22 27);
   --destructive-foreground: oklch(0.98 0.005 90);
 
-  --border: oklch(0.90 0.01 260);
+  --border: oklch(0.9 0.01 260);
   --input: oklch(0.92 0.01 260);
   --ring: oklch(0.35 0.15 260);
 }
@@ -129,27 +164,27 @@
 .dark {
   --background: oklch(0.16 0.02 260);
   --foreground: oklch(0.97 0.005 260);
-  --card: oklch(0.20 0.10 280);
+  --card: oklch(0.2 0.1 280);
   --card-foreground: oklch(0.97 0.005 260);
-  --popover: oklch(0.20 0.10 280);
+  --popover: oklch(0.2 0.1 280);
   --popover-foreground: oklch(0.97 0.005 260);
-  --brand: oklch(0.60 0.15 260);
+  --brand: oklch(0.6 0.15 260);
   --brand-foreground: oklch(0.15 0.02 260);
   --brand-muted: oklch(0.28 0.05 260);
   --gold: oklch(0.85 0.15 80);
-  --primary: oklch(0.60 0.15 260);
+  --primary: oklch(0.6 0.15 260);
   --primary-foreground: oklch(0.15 0.02 260);
   --secondary: oklch(0.24 0.05 280);
   --secondary-foreground: oklch(0.97 0.005 260);
   --muted: oklch(0.24 0.05 280);
   --muted-foreground: oklch(0.7 0.02 260);
-  --accent: oklch(0.60 0.15 150);
+  --accent: oklch(0.6 0.15 150);
   --accent-foreground: oklch(0.97 0.005 150);
   --destructive: oklch(0.65 0.2 27);
   --destructive-foreground: oklch(0.98 0.005 90);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.60 0.15 260);
+  --ring: oklch(0.6 0.15 260);
 }
 
 @layer base {
@@ -169,7 +204,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-serif);
     font-optical-sizing: auto;
     letter-spacing: -0.01em;
@@ -199,20 +237,30 @@
     padding-inline: 1.25rem;
   }
   @media (min-width: 768px) {
-    .container-page { padding-inline: 2.5rem; }
+    .container-page {
+      padding-inline: 2.5rem;
+    }
   }
   @media (min-width: 1280px) {
-    .container-page { padding-inline: 4rem; } /* 64px */
+    .container-page {
+      padding-inline: 4rem;
+    } /* 64px */
   }
   @media (min-width: 1600px) {
-    .container-page { padding-inline: 4rem; max-width: 1600px; }
+    .container-page {
+      padding-inline: 4rem;
+      max-width: 1600px;
+    }
   }
 
-  .section-y { padding-block: 5rem; }
+  .section-y {
+    padding-block: 5rem;
+  }
   @media (min-width: 1024px) {
-    .section-y { padding-block: 6.25rem; } /* 100px */
+    .section-y {
+      padding-block: 6.25rem;
+    } /* 100px */
   }
-
 
   .prose-journal {
     color: var(--foreground);
@@ -230,13 +278,37 @@
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
   }
-  .prose-journal p { margin-bottom: 1rem; }
-  .prose-journal ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
-  .prose-journal ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 1rem; }
-  .prose-journal li { margin-bottom: 0.25rem; }
-  .prose-journal a { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
-  .prose-journal strong { font-weight: 600; color: var(--foreground); }
-  .prose-journal code { background: var(--muted); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  .prose-journal p {
+    margin-bottom: 1rem;
+  }
+  .prose-journal ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose-journal ol {
+    list-style: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose-journal li {
+    margin-bottom: 0.25rem;
+  }
+  .prose-journal a {
+    color: var(--brand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-journal strong {
+    font-weight: 600;
+    color: var(--foreground);
+  }
+  .prose-journal code {
+    background: var(--muted);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
 
   .glass-nav {
     background: color-mix(in oklab, var(--background) 82%, transparent);

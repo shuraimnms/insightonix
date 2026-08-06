@@ -13,5 +13,7 @@ export const Route = createFileRoute("/copyright-policy")({
     links: [{ rel: "canonical", href: "/copyright-policy" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("copyright-policy")),
-  component: () => <ContentPage slug="copyright-policy" title="Copyright Policy" crumb="Copyright" />,
+  component: () => (
+    <ContentPage slug="copyright-policy" title="Copyright Policy" crumb="Copyright" />
+  ),
 });

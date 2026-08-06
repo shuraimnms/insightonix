@@ -10,7 +10,10 @@ export const Route = createFileRoute("/editorial-board")({
   head: () => ({
     meta: [
       { title: "Editorial Board — INSIGHTONIX" },
-      { name: "description", content: "Editors, advisory board members, and peer reviewers of INSIGHTONIX." },
+      {
+        name: "description",
+        content: "Editors, advisory board members, and peer reviewers of INSIGHTONIX.",
+      },
     ],
     links: [{ rel: "canonical", href: "/editorial-board" }],
   }),
@@ -26,7 +29,11 @@ const ROLE_LABEL: Record<string, string> = {
 
 function Board() {
   const { data } = useSuspenseQuery(boardQuery());
-  const groups = { editorial: [] as typeof data, advisory: [] as typeof data, reviewer: [] as typeof data };
+  const groups = {
+    editorial: [] as typeof data,
+    advisory: [] as typeof data,
+    reviewer: [] as typeof data,
+  };
   data.forEach((m) => groups[m.role as keyof typeof groups].push(m));
 
   return (
@@ -47,17 +54,33 @@ function Board() {
                 <article key={m.id} className="rounded-xl border border-border bg-card p-5">
                   <div className="flex items-start gap-4">
                     <div className="flex h-14 w-14 flex-none items-center justify-center rounded-full bg-brand text-brand-foreground font-serif text-lg font-semibold">
-                      {m.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+                      {m.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .slice(0, 2)
+                        .join("")}
                     </div>
                     <div>
                       <div className="font-serif text-base font-semibold">{m.name}</div>
-                      {m.title ? <div className="text-xs uppercase tracking-wider text-brand font-semibold mt-0.5">{m.title}</div> : null}
-                      <div className="mt-1 text-sm text-muted-foreground">{m.affiliation}{m.country ? ` · ${m.country}` : ""}</div>
+                      {m.title ? (
+                        <div className="text-xs uppercase tracking-wider text-brand font-semibold mt-0.5">
+                          {m.title}
+                        </div>
+                      ) : null}
+                      <div className="mt-1 text-sm text-muted-foreground">
+                        {m.affiliation}
+                        {m.country ? ` · ${m.country}` : ""}
+                      </div>
                     </div>
                   </div>
-                  {m.bio ? <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{m.bio}</p> : null}
+                  {m.bio ? (
+                    <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{m.bio}</p>
+                  ) : null}
                   {m.email ? (
-                    <a href={`mailto:${m.email}`} className="mt-3 inline-flex items-center gap-1.5 text-xs text-brand hover:underline">
+                    <a
+                      href={`mailto:${m.email}`}
+                      className="mt-3 inline-flex items-center gap-1.5 text-xs text-brand hover:underline"
+                    >
                       <Mail className="h-3 w-3" /> {m.email}
                     </a>
                   ) : null}

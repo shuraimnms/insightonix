@@ -10,7 +10,10 @@ export const Route = createFileRoute("/current-issue")({
   head: () => ({
     meta: [
       { title: "Current Issue — INSIGHTONIX" },
-      { name: "description", content: "The latest peer-reviewed issue of INSIGHTONIX with full table of contents." },
+      {
+        name: "description",
+        content: "The latest peer-reviewed issue of INSIGHTONIX with full table of contents.",
+      },
     ],
     links: [{ rel: "canonical", href: "/current-issue" }],
   }),
@@ -42,7 +45,9 @@ function CurrentIssue() {
           {articles.map((a, i) => (
             <li key={a.id} className="p-6">
               <div className="flex items-baseline gap-4">
-                <div className="w-8 flex-none font-serif text-2xl text-muted-foreground">{i + 1}</div>
+                <div className="w-8 flex-none font-serif text-2xl text-muted-foreground">
+                  {i + 1}
+                </div>
                 <div className="min-w-0 flex-1">
                   <Link
                     to="/articles/$slug"
@@ -51,16 +56,29 @@ function CurrentIssue() {
                   >
                     {a.title}
                   </Link>
-                  <div className="mt-1 text-sm text-muted-foreground">{(a.authors as string[]).join(", ")}</div>
+                  <div className="mt-1 text-sm text-muted-foreground">
+                    {(a.authors as string[]).join(", ")}
+                  </div>
                   <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{a.abstract}</p>
                   <div className="mt-3 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
-                    {a.page_start ? <span>Pages {a.page_start}–{a.page_end}</span> : null}
+                    {a.page_start ? (
+                      <span>
+                        Pages {a.page_start}–{a.page_end}
+                      </span>
+                    ) : null}
                     {a.doi ? <span>DOI: {a.doi}</span> : null}
-                    <Link to="/articles/$slug" params={{ slug: a.slug }} className="inline-flex items-center gap-1 text-brand hover:underline">
+                    <Link
+                      to="/articles/$slug"
+                      params={{ slug: a.slug }}
+                      className="inline-flex items-center gap-1 text-brand hover:underline"
+                    >
                       <FileText className="h-3 w-3" /> Abstract
                     </Link>
                     {a.pdf_url ? (
-                      <a href={a.pdf_url} className="inline-flex items-center gap-1 text-brand hover:underline">
+                      <a
+                        href={a.pdf_url}
+                        className="inline-flex items-center gap-1 text-brand hover:underline"
+                      >
                         <Download className="h-3 w-3" /> PDF
                       </a>
                     ) : null}

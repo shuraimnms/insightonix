@@ -1,19 +1,52 @@
-import { createFileRoute, Outlet, redirect, Link, useLocation, useNavigate } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Outlet,
+  redirect,
+  Link,
+  useLocation,
+  useNavigate,
+} from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { SuperAdminProvider, useSuperAdmin } from "@/context/SuperAdminContext";
 import {
-  Shield, Search, LogOut, Menu, X, ChevronDown, ExternalLink,
-  LayoutDashboard, Globe2, Users, UserSquare2, ClipboardList, Building2, Eye, Crown,
-  FileText, Layers, BookOpen, Mic2, DollarSign, Award, Megaphone, BarChart3, TrendingUp,
-  KeyRound, Sparkles, Settings, Rocket,
+  Shield,
+  Search,
+  LogOut,
+  Menu,
+  X,
+  ChevronDown,
+  ExternalLink,
+  LayoutDashboard,
+  Globe2,
+  Users,
+  UserSquare2,
+  ClipboardList,
+  Building2,
+  Eye,
+  Crown,
+  FileText,
+  Layers,
+  BookOpen,
+  Mic2,
+  DollarSign,
+  Award,
+  Megaphone,
+  BarChart3,
+  TrendingUp,
+  KeyRound,
+  Sparkles,
+  Settings,
+  Rocket,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/super-admin")({
   beforeLoad: async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) throw redirect({ to: "/super-admin/login" });
     const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", user.id);
     if (!roles?.some((r) => r.role === "super_admin")) {
@@ -67,7 +100,12 @@ function SuperAdminShell() {
 
   const initials = useMemo(() => {
     const seed = email || "SA";
-    return seed.split(/[@.\s]/).filter(Boolean).slice(0, 2).map((s) => s[0]!.toUpperCase()).join("");
+    return seed
+      .split(/[@.\s]/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((s) => s[0]!.toUpperCase())
+      .join("");
   }, [email]);
 
   const signOut = async () => {
@@ -87,7 +125,11 @@ function SuperAdminShell() {
       {/* Topbar */}
       <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
         <div className="flex h-16 items-center gap-3 px-4 sm:px-6">
-          <button onClick={() => setMobileNav((v) => !v)} className="rounded-md p-2 text-slate-300 hover:bg-slate-800 lg:hidden" aria-label="Menu">
+          <button
+            onClick={() => setMobileNav((v) => !v)}
+            className="rounded-md p-2 text-slate-300 hover:bg-slate-800 lg:hidden"
+            aria-label="Menu"
+          >
             {mobileNav ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
           <Link to="/super-admin/dashboard" className="flex items-center gap-2">
@@ -95,8 +137,12 @@ function SuperAdminShell() {
               <Shield className="h-5 w-5 text-white" />
             </div>
             <div className="leading-tight">
-              <div className="text-sm font-semibold tracking-wide text-white">SUPER ADMIN <span className="text-amber-400">PORTAL</span></div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">Multi-Journal Control</div>
+              <div className="text-sm font-semibold tracking-wide text-white">
+                SUPER ADMIN <span className="text-amber-400">PORTAL</span>
+              </div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                Multi-Journal Control
+              </div>
             </div>
           </Link>
 
@@ -125,18 +171,28 @@ function SuperAdminShell() {
             </button>
             {siteMenu ? (
               <div className="absolute right-0 top-full z-50 mt-2 w-72 overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow-2xl">
-                <div className="border-b border-slate-800 px-3 py-2 text-[10px] uppercase tracking-wider text-slate-500">Switch site</div>
+                <div className="border-b border-slate-800 px-3 py-2 text-[10px] uppercase tracking-wider text-slate-500">
+                  Switch site
+                </div>
                 <ul className="max-h-72 overflow-y-auto py-1">
                   {sites.map((s) => (
                     <li key={s.id}>
                       <button
-                        onClick={() => { setActiveSiteId(s.id); setSiteMenu(false); }}
+                        onClick={() => {
+                          setActiveSiteId(s.id);
+                          setSiteMenu(false);
+                        }}
                         className={cn(
                           "flex w-full items-start gap-3 px-3 py-2 text-left text-sm hover:bg-slate-800",
                           s.id === activeSiteId ? "bg-slate-800/60" : "",
                         )}
                       >
-                        <div className={cn("mt-0.5 h-2 w-2 rounded-full", s.is_active ? "bg-emerald-400" : "bg-slate-600")} />
+                        <div
+                          className={cn(
+                            "mt-0.5 h-2 w-2 rounded-full",
+                            s.is_active ? "bg-emerald-400" : "bg-slate-600",
+                          )}
+                        />
                         <div className="min-w-0">
                           <div className="truncate font-semibold text-white">{s.code}</div>
                           <div className="truncate text-xs text-slate-400">{s.name}</div>
@@ -144,10 +200,16 @@ function SuperAdminShell() {
                       </button>
                     </li>
                   ))}
-                  {sites.length === 0 ? <li className="px-3 py-4 text-sm text-slate-400">No sites yet.</li> : null}
+                  {sites.length === 0 ? (
+                    <li className="px-3 py-4 text-sm text-slate-400">No sites yet.</li>
+                  ) : null}
                 </ul>
                 <div className="border-t border-slate-800 p-2">
-                  <Link to="/super-admin/sites" onClick={() => setSiteMenu(false)} className="flex items-center justify-between rounded-md px-2 py-1.5 text-xs text-amber-400 hover:bg-slate-800">
+                  <Link
+                    to="/super-admin/sites"
+                    onClick={() => setSiteMenu(false)}
+                    className="flex items-center justify-between rounded-md px-2 py-1.5 text-xs text-amber-400 hover:bg-slate-800"
+                  >
                     Manage sites <ExternalLink className="h-3 w-3" />
                   </Link>
                 </div>
@@ -158,14 +220,23 @@ function SuperAdminShell() {
           {/* Profile */}
           <div className="flex items-center gap-2">
             <div className="hidden text-right sm:block">
-              <div className="max-w-[160px] truncate text-xs font-medium text-white">{email || "Super Admin"}</div>
-              <div className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-400">SUPER_ADMIN</div>
+              <div className="max-w-[160px] truncate text-xs font-medium text-white">
+                {email || "Super Admin"}
+              </div>
+              <div className="mt-0.5 inline-flex items-center gap-1 rounded-full bg-amber-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-amber-400">
+                SUPER_ADMIN
+              </div>
             </div>
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-600 text-xs font-bold text-white">
               {initials || "SA"}
             </div>
-            <button onClick={signOut} className="inline-flex h-9 items-center gap-1.5 rounded-md border border-slate-800 bg-slate-900 px-2.5 text-xs font-medium text-slate-300 hover:bg-slate-800" title="Sign out">
-              <LogOut className="h-3.5 w-3.5" /><span className="hidden sm:inline">Sign out</span>
+            <button
+              onClick={signOut}
+              className="inline-flex h-9 items-center gap-1.5 rounded-md border border-slate-800 bg-slate-900 px-2.5 text-xs font-medium text-slate-300 hover:bg-slate-800"
+              title="Sign out"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Sign out</span>
             </button>
           </div>
         </div>
@@ -182,7 +253,8 @@ function SuperAdminShell() {
           <nav className="h-full overflow-y-auto p-3">
             <ul className="space-y-0.5">
               {NAV.map((n) => {
-                const active = location.pathname === n.to || location.pathname.startsWith(n.to + "/");
+                const active =
+                  location.pathname === n.to || location.pathname.startsWith(n.to + "/");
                 return (
                   <li key={n.to}>
                     <Link
@@ -195,7 +267,9 @@ function SuperAdminShell() {
                           : "border-transparent text-slate-400 hover:bg-slate-800/50 hover:text-slate-100",
                       )}
                     >
-                      <n.icon className={cn("h-4 w-4", active ? "text-amber-400" : "text-slate-500")} />
+                      <n.icon
+                        className={cn("h-4 w-4", active ? "text-amber-400" : "text-slate-500")}
+                      />
                       {n.label}
                     </Link>
                   </li>
@@ -204,8 +278,15 @@ function SuperAdminShell() {
             </ul>
             <div className="mt-4 rounded-lg border border-slate-800 bg-slate-950/60 p-3 text-xs text-slate-400">
               <div className="font-semibold text-slate-200">Editorial Console</div>
-              <p className="mt-1 text-[11px] leading-relaxed">Prefer the classic per-journal console? Open the INSIGHTONIX editorial admin.</p>
-              <Link to="/admin" className="mt-2 inline-flex items-center gap-1 text-amber-400 hover:underline">Open /admin <ExternalLink className="h-3 w-3" /></Link>
+              <p className="mt-1 text-[11px] leading-relaxed">
+                Prefer the classic per-journal console? Open the INSIGHTONIX editorial admin.
+              </p>
+              <Link
+                to="/admin"
+                className="mt-2 inline-flex items-center gap-1 text-amber-400 hover:underline"
+              >
+                Open /admin <ExternalLink className="h-3 w-3" />
+              </Link>
             </div>
           </nav>
         </aside>

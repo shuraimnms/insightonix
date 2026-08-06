@@ -1,11 +1,35 @@
-import { createFileRoute, Link, Outlet, useLocation, useNavigate, redirect } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  redirect,
+} from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import {
-  LayoutDashboard, Inbox, FileText, BookOpen, Users, Megaphone, FileEdit,
-  Calendar, Book, Settings, UserCog, Mail, LogOut, ArrowLeft,
-  Award, Megaphone as MegaphoneIcon, TrendingUp, Sparkles, Fingerprint,
-  BarChart3, Wrench,
+  LayoutDashboard,
+  Inbox,
+  FileText,
+  BookOpen,
+  Users,
+  Megaphone,
+  FileEdit,
+  Calendar,
+  Book,
+  Settings,
+  UserCog,
+  Mail,
+  LogOut,
+  ArrowLeft,
+  Award,
+  Megaphone as MegaphoneIcon,
+  TrendingUp,
+  Sparkles,
+  Fingerprint,
+  BarChart3,
+  Wrench,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { JOURNAL } from "@/lib/journal";
@@ -13,7 +37,9 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   beforeLoad: async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (!user) throw redirect({ to: "/auth" });
     const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", user.id);
     const staff = !!roles?.some((r) => r.role === "super_admin" || r.role === "editor");
@@ -65,20 +91,28 @@ function AdminShell() {
       <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[260px_1fr]">
         <aside className="hidden border-r border-border bg-secondary/40 lg:flex lg:flex-col">
           <div className="border-b border-border p-5">
-            <div className="text-xs uppercase tracking-widest text-brand font-semibold">{JOURNAL.short} · Admin</div>
-            <div className="mt-1 font-serif text-lg font-semibold leading-tight">Editorial Console</div>
+            <div className="text-xs uppercase tracking-widest text-brand font-semibold">
+              {JOURNAL.short} · Admin
+            </div>
+            <div className="mt-1 font-serif text-lg font-semibold leading-tight">
+              Editorial Console
+            </div>
           </div>
           <nav className="flex-1 overflow-y-auto p-3">
             <ul className="space-y-0.5">
               {NAV.map((n) => {
-                const active = n.exact ? location.pathname === n.to : location.pathname.startsWith(n.to);
+                const active = n.exact
+                  ? location.pathname === n.to
+                  : location.pathname.startsWith(n.to);
                 return (
                   <li key={n.to}>
                     <Link
                       to={n.to}
                       className={cn(
                         "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition",
-                        active ? "bg-brand text-brand-foreground" : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                        active
+                          ? "bg-brand text-brand-foreground"
+                          : "text-muted-foreground hover:bg-accent hover:text-foreground",
                       )}
                     >
                       <n.icon className="h-4 w-4" />
@@ -92,10 +126,16 @@ function AdminShell() {
           <div className="border-t border-border p-3 text-xs text-muted-foreground">
             <div className="truncate">{email}</div>
             <div className="mt-2 flex gap-2">
-              <Link to="/" className="inline-flex h-8 items-center gap-1 rounded-md border border-border bg-background px-2 text-xs hover:bg-accent">
+              <Link
+                to="/"
+                className="inline-flex h-8 items-center gap-1 rounded-md border border-border bg-background px-2 text-xs hover:bg-accent"
+              >
                 <ArrowLeft className="h-3 w-3" /> Site
               </Link>
-              <button onClick={signOut} className="inline-flex h-8 items-center gap-1 rounded-md border border-border bg-background px-2 text-xs hover:bg-accent">
+              <button
+                onClick={signOut}
+                className="inline-flex h-8 items-center gap-1 rounded-md border border-border bg-background px-2 text-xs hover:bg-accent"
+              >
                 <LogOut className="h-3 w-3" /> Sign out
               </button>
             </div>
@@ -108,9 +148,20 @@ function AdminShell() {
             <div className="font-serif text-lg font-semibold">{JOURNAL.short} Admin</div>
             <div className="mt-2 flex gap-1 overflow-x-auto">
               {NAV.map((n) => {
-                const active = n.exact ? location.pathname === n.to : location.pathname.startsWith(n.to);
+                const active = n.exact
+                  ? location.pathname === n.to
+                  : location.pathname.startsWith(n.to);
                 return (
-                  <Link key={n.to} to={n.to} className={cn("flex-none rounded-md px-3 py-1.5 text-xs font-medium", active ? "bg-brand text-brand-foreground" : "bg-secondary text-secondary-foreground")}>
+                  <Link
+                    key={n.to}
+                    to={n.to}
+                    className={cn(
+                      "flex-none rounded-md px-3 py-1.5 text-xs font-medium",
+                      active
+                        ? "bg-brand text-brand-foreground"
+                        : "bg-secondary text-secondary-foreground",
+                    )}
+                  >
                     {n.label}
                   </Link>
                 );

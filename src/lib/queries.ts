@@ -154,14 +154,28 @@ export const statsQuery = () =>
     queryKey: ["stats"],
     queryFn: async () => {
       const [articles, issues, board] = await Promise.all([
-        supabase.from("articles").select("*", { count: "exact", head: true }).eq("status", "published"),
-        supabase.from("issues").select("*", { count: "exact", head: true }).eq("is_published", true),
-        supabase.from("board_members").select("*", { count: "exact", head: true }).eq("is_active", true),
+        supabase
+          .from("articles")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "published"),
+        supabase
+          .from("issues")
+          .select("*", { count: "exact", head: true })
+          .eq("is_published", true),
+        supabase
+          .from("board_members")
+          .select("*", { count: "exact", head: true })
+          .eq("is_active", true),
       ]);
       // count distinct authors is not trivial via head; approximate with a sample select
-      const { data: authorSample } = await supabase.from("articles").select("authors").eq("status", "published");
+      const { data: authorSample } = await supabase
+        .from("articles")
+        .select("authors")
+        .eq("status", "published");
       const authorSet = new Set<string>();
-      (authorSample ?? []).forEach((r) => (r.authors as string[] | null)?.forEach((a) => authorSet.add(a)));
+      (authorSample ?? []).forEach((r) =>
+        (r.authors as string[] | null)?.forEach((a) => authorSet.add(a)),
+      );
       return {
         articles: articles.count ?? 0,
         issues: issues.count ?? 0,

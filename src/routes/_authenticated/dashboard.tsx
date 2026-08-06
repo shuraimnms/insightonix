@@ -11,7 +11,10 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 });
 
 type Submission = {
-  id: string; title: string; status: string; created_at: string;
+  id: string;
+  title: string;
+  status: string;
+  created_at: string;
 };
 
 function Dashboard() {
@@ -22,7 +25,9 @@ function Dashboard() {
 
   useEffect(() => {
     (async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       setEmail(user?.email ?? "");
       const { data } = await supabase
         .from("submissions")
@@ -30,7 +35,10 @@ function Dashboard() {
         .eq("author_id", user?.id ?? "")
         .order("created_at", { ascending: false });
       setSubs(data ?? []);
-      const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", user?.id ?? "");
+      const { data: roles } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user?.id ?? "");
       setIsStaff(!!roles?.some((r) => r.role === "super_admin" || r.role === "editor"));
     })();
   }, []);
@@ -47,16 +55,25 @@ function Dashboard() {
       <div className="container-page py-12">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div className="flex gap-2">
-            <Link to="/submit" className="inline-flex h-10 items-center gap-2 rounded-md bg-brand px-4 text-sm font-semibold text-brand-foreground">
+            <Link
+              to="/submit"
+              className="inline-flex h-10 items-center gap-2 rounded-md bg-brand px-4 text-sm font-semibold text-brand-foreground"
+            >
               <Send className="h-4 w-4" /> New submission
             </Link>
             {isStaff && (
-              <Link to="/admin" className="inline-flex h-10 items-center gap-2 rounded-md border border-border bg-background px-4 text-sm font-medium hover:bg-accent">
+              <Link
+                to="/admin"
+                className="inline-flex h-10 items-center gap-2 rounded-md border border-border bg-background px-4 text-sm font-medium hover:bg-accent"
+              >
                 <ShieldCheck className="h-4 w-4" /> Admin dashboard
               </Link>
             )}
           </div>
-          <button onClick={signOut} className="inline-flex h-10 items-center gap-2 rounded-md border border-border px-4 text-sm text-muted-foreground hover:text-foreground hover:bg-accent">
+          <button
+            onClick={signOut}
+            className="inline-flex h-10 items-center gap-2 rounded-md border border-border px-4 text-sm text-muted-foreground hover:text-foreground hover:bg-accent"
+          >
             <LogOut className="h-4 w-4" /> Sign out
           </button>
         </div>
@@ -73,7 +90,9 @@ function Dashboard() {
               <li key={s.id} className="flex items-center justify-between gap-4 p-4">
                 <div>
                   <div className="font-medium">{s.title}</div>
-                  <div className="text-xs text-muted-foreground">Submitted {new Date(s.created_at).toLocaleDateString()}</div>
+                  <div className="text-xs text-muted-foreground">
+                    Submitted {new Date(s.created_at).toLocaleDateString()}
+                  </div>
                 </div>
                 <StatusBadge status={s.status} />
               </li>

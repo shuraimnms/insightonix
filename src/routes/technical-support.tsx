@@ -4,13 +4,26 @@ import { PageHero } from "@/components/site/page-hero";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { FAQSection } from "@/components/site/faq-section";
-import { LifeBuoy, KeyRound, UploadCloud, Hash, FileWarning, Mail, MessageSquare, Clock } from "lucide-react";
+import {
+  LifeBuoy,
+  KeyRound,
+  UploadCloud,
+  Hash,
+  FileWarning,
+  Mail,
+  MessageSquare,
+  Clock,
+} from "lucide-react";
 
 export const Route = createFileRoute("/technical-support")({
   head: () => ({
     meta: [
       { title: "Technical Support — INSIGHTONIX" },
-      { name: "description", content: "Get help with account access, submission uploads, DOI look-up, certificate verification, and any technical issue with the INSIGHTONIX platform." },
+      {
+        name: "description",
+        content:
+          "Get help with account access, submission uploads, DOI look-up, certificate verification, and any technical issue with the INSIGHTONIX platform.",
+      },
       { property: "og:title", content: "Technical Support — INSIGHTONIX" },
       { property: "og:description", content: "Fast help for authors, reviewers, and readers." },
     ],
@@ -20,10 +33,30 @@ export const Route = createFileRoute("/technical-support")({
 });
 
 const TOPICS = [
-  { icon: KeyRound, title: "Account & sign-in", body: "Password resets, Google sign-in issues, ORCID linking, and multi-author account merging.", to: "/auth" },
-  { icon: UploadCloud, title: "Manuscript upload", body: "File format guidance, 25 MB size limit, supplementary files, and browser-specific issues.", to: "/submit" },
-  { icon: Hash, title: "DOI & indexing", body: "DOI resolution, Crossref metadata, Google Scholar visibility, and indexing certificate requests.", to: "/indexing" },
-  { icon: FileWarning, title: "Verification & certificates", body: "Certificate ID look-up, re-issue requests, and confirmation letters for institutions.", to: "/verify" },
+  {
+    icon: KeyRound,
+    title: "Account & sign-in",
+    body: "Password resets, Google sign-in issues, ORCID linking, and multi-author account merging.",
+    to: "/auth",
+  },
+  {
+    icon: UploadCloud,
+    title: "Manuscript upload",
+    body: "File format guidance, 25 MB size limit, supplementary files, and browser-specific issues.",
+    to: "/submit",
+  },
+  {
+    icon: Hash,
+    title: "DOI & indexing",
+    body: "DOI resolution, Crossref metadata, Google Scholar visibility, and indexing certificate requests.",
+    to: "/indexing",
+  },
+  {
+    icon: FileWarning,
+    title: "Verification & certificates",
+    body: "Certificate ID look-up, re-issue requests, and confirmation letters for institutions.",
+    to: "/verify",
+  },
 ];
 
 const SLA = [
@@ -33,9 +66,18 @@ const SLA = [
 ];
 
 const FAQS = [
-  { q: "I never received the confirmation email — what should I do?", a: "Check spam and any institutional quarantine, then request a resend from the sign-in page. If the address is a Gmail alias with a plus-tag, try the primary address." },
-  { q: "My upload keeps failing at the last step.", a: "Ensure the total size is below 25 MB, that filenames contain no special characters, and that you are on a modern Chromium or Firefox browser. If the issue persists, email support with a screenshot." },
-  { q: "How do I recover a submission ID?", a: "Log in to your author dashboard — every submission is listed with its ID (INSIGHTONIX-YYYY-####). If the account is inaccessible, contact the editorial office with your registered email." },
+  {
+    q: "I never received the confirmation email — what should I do?",
+    a: "Check spam and any institutional quarantine, then request a resend from the sign-in page. If the address is a Gmail alias with a plus-tag, try the primary address.",
+  },
+  {
+    q: "My upload keeps failing at the last step.",
+    a: "Ensure the total size is below 25 MB, that filenames contain no special characters, and that you are on a modern Chromium or Firefox browser. If the issue persists, email support with a screenshot.",
+  },
+  {
+    q: "How do I recover a submission ID?",
+    a: "Log in to your author dashboard — every submission is listed with its ID (INSIGHTONIX-YYYY-####). If the account is inaccessible, contact the editorial office with your registered email.",
+  },
 ];
 
 function Support() {
@@ -52,7 +94,10 @@ function Support() {
         {/* SLA band */}
         <section className="grid gap-4 sm:grid-cols-3">
           {SLA.map((s) => (
-            <div key={s.label} className="flex items-center gap-4 rounded-xl border border-border bg-card p-5">
+            <div
+              key={s.label}
+              className="flex items-center gap-4 rounded-xl border border-border bg-card p-5"
+            >
               <div className="flex h-11 w-11 items-center justify-center rounded-md bg-brand-muted text-brand">
                 <s.icon className="h-5 w-5" />
               </div>
@@ -70,7 +115,11 @@ function Support() {
           <div className="mt-2 rule-gold" />
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             {TOPICS.map((t) => (
-              <a key={t.title} href={t.to} className="group rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-elev">
+              <a
+                key={t.title}
+                href={t.to}
+                className="group rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-elev"
+              >
                 <div className="flex h-11 w-11 items-center justify-center rounded-md bg-brand-muted text-brand transition group-hover:bg-brand group-hover:text-brand-foreground">
                   <t.icon className="h-5 w-5" />
                 </div>
@@ -88,16 +137,31 @@ function Support() {
               <Mail className="h-5 w-5" />
             </div>
             <h3 className="mt-4 font-serif text-xl font-semibold">Email support</h3>
-            <p className="mt-2 text-sm text-muted-foreground">Send a description of the issue plus a screenshot if possible.</p>
-            <a href="mailto:support@insightonix.com" className="mt-4 inline-block font-mono text-sm text-brand hover:underline">support@insightonix.com</a>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Send a description of the issue plus a screenshot if possible.
+            </p>
+            <a
+              href="mailto:support@insightonix.com"
+              className="mt-4 inline-block font-mono text-sm text-brand hover:underline"
+            >
+              support@insightonix.com
+            </a>
           </div>
           <div className="rounded-2xl border border-border bg-card p-8">
             <div className="flex h-11 w-11 items-center justify-center rounded-md bg-brand-muted text-brand">
               <MessageSquare className="h-5 w-5" />
             </div>
             <h3 className="mt-4 font-serif text-xl font-semibold">Editorial queries</h3>
-            <p className="mt-2 text-sm text-muted-foreground">For manuscript decisions, ethics, or review conduct, please reach the editorial office directly.</p>
-            <a href="mailto:editorial@insightonix.com" className="mt-4 inline-block font-mono text-sm text-brand hover:underline">editorial@insightonix.com</a>
+            <p className="mt-2 text-sm text-muted-foreground">
+              For manuscript decisions, ethics, or review conduct, please reach the editorial office
+              directly.
+            </p>
+            <a
+              href="mailto:editorial@insightonix.com"
+              className="mt-4 inline-block font-mono text-sm text-brand hover:underline"
+            >
+              editorial@insightonix.com
+            </a>
           </div>
         </section>
 

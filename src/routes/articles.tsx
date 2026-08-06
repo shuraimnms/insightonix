@@ -18,7 +18,10 @@ export const Route = createFileRoute("/articles")({
   head: () => ({
     meta: [
       { title: "Articles — INSIGHTONIX" },
-      { name: "description", content: "Search and browse all peer-reviewed articles published in INSIGHTONIX." },
+      {
+        name: "description",
+        content: "Search and browse all peer-reviewed articles published in INSIGHTONIX.",
+      },
     ],
     links: [{ rel: "canonical", href: "/articles" }],
   }),
@@ -50,7 +53,12 @@ function Articles() {
       if (year && String(iss?.year ?? "") !== year) return false;
       if (q) {
         const s = q.toLowerCase();
-        const hay = [a.title, a.abstract ?? "", (a.authors as string[]).join(" "), (a.keywords as string[]).join(" ")]
+        const hay = [
+          a.title,
+          a.abstract ?? "",
+          (a.authors as string[]).join(" "),
+          (a.keywords as string[]).join(" "),
+        ]
           .join(" ")
           .toLowerCase();
         if (!hay.includes(s)) return false;
@@ -61,14 +69,20 @@ function Articles() {
 
   return (
     <SiteLayout>
-      <PageHero eyebrow="Library" title="All articles" intro="Search across every peer-reviewed paper published in INSIGHTONIX." />
+      <PageHero
+        eyebrow="Library"
+        title="All articles"
+        intro="Search across every peer-reviewed paper published in INSIGHTONIX."
+      />
       <div className="container-page py-12">
         <Breadcrumbs trail={[{ label: "Articles" }]} />
 
         {/* Filters */}
         <div className="mb-6 flex flex-wrap items-end gap-3 rounded-xl border border-border bg-card p-4">
           <label className="flex-1 min-w-[240px]">
-            <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">Search</div>
+            <div className="mb-1 text-xs uppercase tracking-wider text-muted-foreground">
+              Search
+            </div>
             <div className="relative">
               <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <input
@@ -87,7 +101,11 @@ function Articles() {
               className="h-11 rounded-md border border-border bg-background px-3 text-sm outline-none focus:border-brand"
             >
               <option value="">All years</option>
-              {years.map((y) => <option key={y} value={y}>{y}</option>)}
+              {years.map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
+              ))}
             </select>
           </label>
           <label>
@@ -99,13 +117,19 @@ function Articles() {
             >
               <option value="">All issues</option>
               {issues.map((i) => (
-                <option key={i.id} value={i.id}>Vol. {i.volume} · {i.number} · {i.year}</option>
+                <option key={i.id} value={i.id}>
+                  Vol. {i.volume} · {i.number} · {i.year}
+                </option>
               ))}
             </select>
           </label>
           {(q || year || issueId) && (
             <button
-              onClick={() => { setQ(""); setYear(""); setIssueId(""); }}
+              onClick={() => {
+                setQ("");
+                setYear("");
+                setIssueId("");
+              }}
               className="h-11 rounded-md border border-border bg-background px-4 text-sm hover:bg-accent"
             >
               Reset
@@ -113,7 +137,9 @@ function Articles() {
           )}
         </div>
 
-        <div className="mb-4 text-sm text-muted-foreground">{filtered.length} of {articles.length} articles</div>
+        <div className="mb-4 text-sm text-muted-foreground">
+          {filtered.length} of {articles.length} articles
+        </div>
 
         <ul className="space-y-3">
           {filtered.map((a) => {
@@ -126,15 +152,26 @@ function Articles() {
                   className="group block rounded-xl border border-border bg-card p-5 hover:border-brand transition"
                 >
                   <div className="flex flex-wrap items-baseline gap-2 text-xs text-muted-foreground">
-                    {iss ? <span>Vol. {iss.volume} · Issue {iss.number} · {iss.year}</span> : null}
+                    {iss ? (
+                      <span>
+                        Vol. {iss.volume} · Issue {iss.number} · {iss.year}
+                      </span>
+                    ) : null}
                     {a.doi ? <span>· DOI: {a.doi}</span> : null}
                   </div>
-                  <div className="mt-1 font-serif text-lg font-semibold group-hover:text-brand">{a.title}</div>
-                  <div className="mt-1 text-sm text-muted-foreground">{(a.authors as string[]).join(", ")}</div>
+                  <div className="mt-1 font-serif text-lg font-semibold group-hover:text-brand">
+                    {a.title}
+                  </div>
+                  <div className="mt-1 text-sm text-muted-foreground">
+                    {(a.authors as string[]).join(", ")}
+                  </div>
                   <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{a.abstract}</p>
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {(a.keywords as string[]).slice(0, 5).map((k) => (
-                      <span key={k} className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+                      <span
+                        key={k}
+                        className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground"
+                      >
                         {k}
                       </span>
                     ))}

@@ -39,17 +39,24 @@ export const extractManuscriptMetadata = createServerFn({ method: "POST" })
     });
 
     if (res.status === 429) throw new Error("AI rate limit — try again in a moment.");
-    if (res.status === 402) throw new Error("AI credits exhausted. Add credits in Lovable settings.");
+    if (res.status === 402)
+      throw new Error("AI credits exhausted. Add credits in Lovable settings.");
     if (!res.ok) throw new Error(`AI error: ${res.status}`);
 
     const json = await res.json();
     const raw = json?.choices?.[0]?.message?.content ?? "{}";
     let parsed: Partial<Extracted> = {};
-    try { parsed = JSON.parse(raw); } catch { parsed = {}; }
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      parsed = {};
+    }
     return {
       title: parsed.title ?? "",
       abstract: parsed.abstract ?? "",
       keywords: Array.isArray(parsed.keywords) ? parsed.keywords.slice(0, 8) : [],
-      suggested_reviewers: Array.isArray(parsed.suggested_reviewers) ? parsed.suggested_reviewers.slice(0, 5) : [],
+      suggested_reviewers: Array.isArray(parsed.suggested_reviewers)
+        ? parsed.suggested_reviewers.slice(0, 5)
+        : [],
     };
   });

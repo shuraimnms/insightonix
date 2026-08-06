@@ -9,9 +9,17 @@ export const Route = createFileRoute("/open-access-policy")({
   head: () => ({
     meta: [
       { title: "Open Access Policy — INSIGHTONIX" },
-      { name: "description", content: "INSIGHTONIX provides open access to published content to promote wider dissemination of academic knowledge." },
+      {
+        name: "description",
+        content:
+          "INSIGHTONIX provides open access to published content to promote wider dissemination of academic knowledge.",
+      },
       { property: "og:title", content: "Open Access Policy — INSIGHTONIX" },
-      { property: "og:description", content: "Open access statement, user and author responsibilities, and archiving policy of INSIGHTONIX." },
+      {
+        property: "og:description",
+        content:
+          "Open access statement, user and author responsibilities, and archiving policy of INSIGHTONIX.",
+      },
     ],
     links: [{ rel: "canonical", href: "/open-access-policy" }],
   }),
@@ -52,7 +60,9 @@ function OpenAccess() {
             </div>
             <h3 className="mt-4 font-serif text-lg font-semibold">Open access statement</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Readers may access published articles for legitimate academic, educational, research, and professional purposes, subject to the journal's copyright and licensing conditions.
+              Readers may access published articles for legitimate academic, educational, research,
+              and professional purposes, subject to the journal's copyright and licensing
+              conditions.
             </p>
           </article>
           <article className="rounded-xl border border-border bg-card p-6">
@@ -61,7 +71,9 @@ function OpenAccess() {
             </div>
             <h3 className="mt-4 font-serif text-lg font-semibold">Why open access</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Open access helps researchers, academicians, students, practitioners, professionals, policy makers, and institutions access scholarly information without subscription barriers.
+              Open access helps researchers, academicians, students, practitioners, professionals,
+              policy makers, and institutions access scholarly information without subscription
+              barriers.
             </p>
           </article>
           <article className="rounded-xl border border-border bg-card p-6">
@@ -70,7 +82,9 @@ function OpenAccess() {
             </div>
             <h3 className="mt-4 font-serif text-lg font-semibold">Access & archiving</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              Published articles may be made available through the journal website and other approved academic, digital, archival, or indexing platforms in accordance with the journal's copyright and dissemination policy.
+              Published articles may be made available through the journal website and other
+              approved academic, digital, archival, or indexing platforms in accordance with the
+              journal's copyright and dissemination policy.
             </p>
           </article>
         </section>
@@ -79,7 +93,9 @@ function OpenAccess() {
           <article className="rounded-2xl border border-border bg-card p-6 lg:p-8">
             <h2 className="font-serif text-xl font-semibold">User responsibilities</h2>
             <div className="mt-2 rule-gold" />
-            <p className="mt-3 text-sm text-muted-foreground">Readers using INSIGHTONIX content must:</p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Readers using INSIGHTONIX content must:
+            </p>
             <ul className="mt-3 space-y-2 text-sm">
               {USER_RESP.map((r) => (
                 <li key={r} className="flex items-start gap-2">
@@ -110,7 +126,9 @@ function OpenAccess() {
             <div>
               <div className="font-serif text-lg font-semibold">Licence notice</div>
               <p className="mt-1 text-sm text-muted-foreground">
-                INSIGHTONIX follows open access. A specific Creative Commons licence has not yet been formally adopted by the journal administration. Until adoption, no CC BY, CC BY-NC, or other licence badge is displayed on published articles.
+                INSIGHTONIX follows open access. A specific Creative Commons licence has not yet
+                been formally adopted by the journal administration. Until adoption, no CC BY, CC
+                BY-NC, or other licence badge is displayed on published articles.
               </p>
             </div>
           </div>

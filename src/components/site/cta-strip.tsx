@@ -17,7 +17,9 @@ export function CtaStrip({
 }) {
   return (
     <section className="mt-16 overflow-hidden rounded-2xl border border-brand/30 bg-gradient-to-br from-brand-muted/60 via-background to-background p-8 lg:p-12">
-      {eyebrow ? <div className="text-xs uppercase tracking-[0.2em] text-brand font-semibold">{eyebrow}</div> : null}
+      {eyebrow ? (
+        <div className="text-xs uppercase tracking-[0.2em] text-brand font-semibold">{eyebrow}</div>
+      ) : null}
       <h2 className="mt-2 font-serif text-3xl font-semibold leading-tight lg:text-4xl">{title}</h2>
       {intro ? <p className="mt-3 max-w-2xl text-muted-foreground">{intro}</p> : null}
       <div className="mt-6 flex flex-wrap gap-3">

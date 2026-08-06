@@ -13,5 +13,7 @@ export const Route = createFileRoute("/manuscript-template")({
     links: [{ rel: "canonical", href: "/manuscript-template" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("manuscript-template")),
-  component: () => <ContentPage slug="manuscript-template" title="Manuscript Template" crumb="Template" />,
+  component: () => (
+    <ContentPage slug="manuscript-template" title="Manuscript Template" crumb="Template" />
+  ),
 });

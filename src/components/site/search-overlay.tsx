@@ -36,7 +36,10 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center bg-foreground/40 p-4 pt-20" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-center bg-foreground/40 p-4 pt-20"
+      onClick={onClose}
+    >
       <div
         role="dialog"
         aria-modal="true"
@@ -53,7 +56,11 @@ export function SearchOverlay({ open, onClose }: { open: boolean; onClose: () =>
             placeholder="Search articles, authors, keywords…"
             className="h-14 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
           />
-          <button onClick={onClose} aria-label="Close" className="p-2 text-muted-foreground hover:text-foreground">
+          <button
+            onClick={onClose}
+            aria-label="Close"
+            className="p-2 text-muted-foreground hover:text-foreground"
+          >
             <X className="h-4 w-4" />
           </button>
         </div>

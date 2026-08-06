@@ -11,5 +11,11 @@ export const Route = createFileRoute("/submission-guidelines")({
     links: [{ rel: "canonical", href: "/submission-guidelines" }],
   }),
   loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("submission-guidelines")),
-  component: () => <ContentPage slug="submission-guidelines" title="Submission Guidelines" crumb="Submission Guidelines" />,
+  component: () => (
+    <ContentPage
+      slug="submission-guidelines"
+      title="Submission Guidelines"
+      crumb="Submission Guidelines"
+    />
+  ),
 });

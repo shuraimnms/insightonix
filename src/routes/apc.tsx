@@ -9,9 +9,16 @@ export const Route = createFileRoute("/apc")({
   head: () => ({
     meta: [
       { title: "Publication Charges — INSIGHTONIX" },
-      { name: "description", content: "INSIGHTONIX's publication charges policy, waiver conditions, refund terms, and ethical safeguards for authors." },
+      {
+        name: "description",
+        content:
+          "INSIGHTONIX's publication charges policy, waiver conditions, refund terms, and ethical safeguards for authors.",
+      },
       { property: "og:title", content: "Publication Charges — INSIGHTONIX" },
-      { property: "og:description", content: "Publication and processing charges policy for INSIGHTONIX." },
+      {
+        property: "og:description",
+        content: "Publication and processing charges policy for INSIGHTONIX.",
+      },
     ],
     links: [{ rel: "canonical", href: "/apc" }],
   }),
@@ -64,7 +71,9 @@ function APC() {
             <div>
               <div className="font-serif text-lg font-semibold">Charges not yet finalised</div>
               <p className="mt-1 text-sm text-muted-foreground">
-                The journal administration is finalising the official schedule of publication charges. Until confirmed, the applicable amounts, if any, will be communicated to the corresponding author before final publication.
+                The journal administration is finalising the official schedule of publication
+                charges. Until confirmed, the applicable amounts, if any, will be communicated to
+                the corresponding author before final publication.
               </p>
             </div>
           </div>
@@ -98,7 +107,9 @@ function APC() {
             <h3 className="font-serif text-lg font-semibold">Waiver policy</h3>
             <div className="mt-2 rule-gold" />
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              The journal will clearly state whether full or partial fee waivers are available and the conditions under which they may be granted. Details will be published here once approved by the journal administration.
+              The journal will clearly state whether full or partial fee waivers are available and
+              the conditions under which they may be granted. Details will be published here once
+              approved by the journal administration.
             </p>
           </article>
           <article className="rounded-xl border border-border bg-card p-6">

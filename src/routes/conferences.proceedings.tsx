@@ -12,6 +12,13 @@ export const Route = createFileRoute("/conferences/proceedings")({
     ],
     links: [{ rel: "canonical", href: "/conferences/proceedings" }],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("conferences-proceedings")),
-  component: () => <ContentPage slug="conferences-proceedings" title="Conference Proceedings" crumb="Proceedings" />,
+  loader: ({ context }) =>
+    context.queryClient.ensureQueryData(pageQuery("conferences-proceedings")),
+  component: () => (
+    <ContentPage
+      slug="conferences-proceedings"
+      title="Conference Proceedings"
+      crumb="Proceedings"
+    />
+  ),
 });

@@ -10,7 +10,11 @@ export const Route = createFileRoute("/editorial-office")({
   head: () => ({
     meta: [
       { title: "Editorial Office — INSIGHTONIX" },
-      { name: "description", content: "Contact details, working hours, and remit of the INSIGHTONIX editorial office — the operational heart of the journal." },
+      {
+        name: "description",
+        content:
+          "Contact details, working hours, and remit of the INSIGHTONIX editorial office — the operational heart of the journal.",
+      },
       { property: "og:title", content: "Editorial Office — INSIGHTONIX" },
       { property: "og:description", content: "How to reach the INSIGHTONIX editorial office." },
     ],
@@ -20,16 +24,48 @@ export const Route = createFileRoute("/editorial-office")({
 });
 
 const CHANNELS = [
-  { icon: Mail, label: "Editorial email", value: "editorial@insightonix.com", href: "mailto:editorial@insightonix.com" },
-  { icon: Mail, label: "Technical support", value: "support@insightonix.com", href: "mailto:support@insightonix.com" },
-  { icon: Phone, label: "Phone (office hours)", value: "+91 000 000 0000", href: "tel:+910000000000" },
-  { icon: MapPin, label: "Correspondence", value: "INSIGHTONIX Editorial Office, Registered Address (to be published).", href: "#" },
+  {
+    icon: Mail,
+    label: "Editorial email",
+    value: "editorial@insightonix.com",
+    href: "mailto:editorial@insightonix.com",
+  },
+  {
+    icon: Mail,
+    label: "Technical support",
+    value: "support@insightonix.com",
+    href: "mailto:support@insightonix.com",
+  },
+  {
+    icon: Phone,
+    label: "Phone (office hours)",
+    value: "+91 000 000 0000",
+    href: "tel:+910000000000",
+  },
+  {
+    icon: MapPin,
+    label: "Correspondence",
+    value: "INSIGHTONIX Editorial Office, Registered Address (to be published).",
+    href: "#",
+  },
 ];
 
 const REMIT = [
-  { icon: Users, title: "Manuscript coordination", body: "Author correspondence, reviewer invitations, decision letters, and revision tracking." },
-  { icon: Shield, title: "Ethics & compliance", body: "COPE-aligned handling of misconduct allegations, corrections, and expressions of concern." },
-  { icon: Send, title: "Production & DOI", body: "Copy-editing, typesetting, proof cycles, Crossref DOI deposits, and indexing metadata." },
+  {
+    icon: Users,
+    title: "Manuscript coordination",
+    body: "Author correspondence, reviewer invitations, decision letters, and revision tracking.",
+  },
+  {
+    icon: Shield,
+    title: "Ethics & compliance",
+    body: "COPE-aligned handling of misconduct allegations, corrections, and expressions of concern.",
+  },
+  {
+    icon: Send,
+    title: "Production & DOI",
+    body: "Copy-editing, typesetting, proof cycles, Crossref DOI deposits, and indexing metadata.",
+  },
 ];
 
 const HOURS = [
@@ -39,9 +75,18 @@ const HOURS = [
 ];
 
 const FAQS = [
-  { q: "How quickly does the editorial office respond?", a: "First response within two working days. Ethics or misconduct queries are escalated within 24 hours to the Editor-in-Chief." },
-  { q: "Can I visit the editorial office?", a: "INSIGHTONIX operates a distributed editorial team. All correspondence is handled by email; in-person meetings are by scheduled appointment at conferences." },
-  { q: "Whom should I contact about DOIs or metadata corrections?", a: "Email editorial@insightonix.com with your article DOI and the correction requested. Metadata is re-deposited with Crossref within five working days." },
+  {
+    q: "How quickly does the editorial office respond?",
+    a: "First response within two working days. Ethics or misconduct queries are escalated within 24 hours to the Editor-in-Chief.",
+  },
+  {
+    q: "Can I visit the editorial office?",
+    a: "INSIGHTONIX operates a distributed editorial team. All correspondence is handled by email; in-person meetings are by scheduled appointment at conferences.",
+  },
+  {
+    q: "Whom should I contact about DOIs or metadata corrections?",
+    a: "Email editorial@insightonix.com with your article DOI and the correction requested. Metadata is re-deposited with Crossref within five working days.",
+  },
 ];
 
 function Office() {
@@ -53,17 +98,25 @@ function Office() {
         intro="The INSIGHTONIX editorial office is the operational heart of the journal — coordinating peer review, ethics, production, and post-publication support."
       />
       <div className="container-page py-12">
-        <Breadcrumbs trail={[{ label: "Contact", to: "/contact" }, { label: "Editorial Office" }]} />
+        <Breadcrumbs
+          trail={[{ label: "Contact", to: "/contact" }, { label: "Editorial Office" }]}
+        />
 
         <div className="grid gap-6 lg:grid-cols-2">
           {CHANNELS.map((c) => (
-            <a key={c.label} href={c.href} className="group rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-elev">
+            <a
+              key={c.label}
+              href={c.href}
+              className="group rounded-2xl border border-border bg-card p-6 transition hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-elev"
+            >
               <div className="flex items-start gap-4">
                 <div className="flex h-11 w-11 flex-none items-center justify-center rounded-md bg-brand-muted text-brand transition group-hover:bg-brand group-hover:text-brand-foreground">
                   <c.icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{c.label}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground">
+                    {c.label}
+                  </div>
                   <div className="mt-1 font-serif text-lg font-semibold">{c.value}</div>
                 </div>
               </div>
@@ -78,7 +131,9 @@ function Office() {
             <ul className="mt-5 space-y-4">
               {REMIT.map((r) => (
                 <li key={r.title} className="flex gap-3">
-                  <div className="flex h-9 w-9 flex-none items-center justify-center rounded-md bg-brand-muted text-brand"><r.icon className="h-4 w-4" /></div>
+                  <div className="flex h-9 w-9 flex-none items-center justify-center rounded-md bg-brand-muted text-brand">
+                    <r.icon className="h-4 w-4" />
+                  </div>
                   <div>
                     <div className="font-serif text-base font-semibold">{r.title}</div>
                     <div className="text-sm text-muted-foreground">{r.body}</div>
@@ -102,7 +157,9 @@ function Office() {
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-xs text-muted-foreground">All times listed in Indian Standard Time (UTC+05:30).</p>
+            <p className="mt-4 text-xs text-muted-foreground">
+              All times listed in Indian Standard Time (UTC+05:30).
+            </p>
           </div>
         </section>
 

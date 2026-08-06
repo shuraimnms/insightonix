@@ -12,6 +12,13 @@ export const Route = createFileRoute("/conferences/call-for-papers")({
     ],
     links: [{ rel: "canonical", href: "/conferences/call-for-papers" }],
   }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(pageQuery("conferences-call-for-papers")),
-  component: () => <ContentPage slug="conferences-call-for-papers" title="Call for Papers" crumb="Call for Papers" />,
+  loader: ({ context }) =>
+    context.queryClient.ensureQueryData(pageQuery("conferences-call-for-papers")),
+  component: () => (
+    <ContentPage
+      slug="conferences-call-for-papers"
+      title="Call for Papers"
+      crumb="Call for Papers"
+    />
+  ),
 });

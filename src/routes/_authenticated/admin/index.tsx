@@ -21,21 +21,46 @@ type Stats = {
 
 function AdminDash() {
   const [s, setS] = useState<Stats | null>(null);
-  const [recent, setRecent] = useState<{ id: string; title: string; status: string; created_at: string }[]>([]);
+  const [recent, setRecent] = useState<
+    { id: string; title: string; status: string; created_at: string }[]
+  >([]);
 
   useEffect(() => {
     (async () => {
-      const monthAgo = new Date(); monthAgo.setDate(1);
+      const monthAgo = new Date();
+      monthAgo.setDate(1);
       const [sub, subMonth, pending, pub, board, acc, rej, arts, subsRecent] = await Promise.all([
         supabase.from("submissions").select("*", { count: "exact", head: true }),
-        supabase.from("submissions").select("*", { count: "exact", head: true }).gte("created_at", monthAgo.toISOString()),
-        supabase.from("submissions").select("*", { count: "exact", head: true }).eq("status", "under_review"),
-        supabase.from("articles").select("*", { count: "exact", head: true }).eq("status", "published"),
-        supabase.from("board_members").select("*", { count: "exact", head: true }).eq("is_active", true),
-        supabase.from("submissions").select("*", { count: "exact", head: true }).in("status", ["accepted", "published"]),
-        supabase.from("submissions").select("*", { count: "exact", head: true }).eq("status", "rejected"),
+        supabase
+          .from("submissions")
+          .select("*", { count: "exact", head: true })
+          .gte("created_at", monthAgo.toISOString()),
+        supabase
+          .from("submissions")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "under_review"),
+        supabase
+          .from("articles")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "published"),
+        supabase
+          .from("board_members")
+          .select("*", { count: "exact", head: true })
+          .eq("is_active", true),
+        supabase
+          .from("submissions")
+          .select("*", { count: "exact", head: true })
+          .in("status", ["accepted", "published"]),
+        supabase
+          .from("submissions")
+          .select("*", { count: "exact", head: true })
+          .eq("status", "rejected"),
         supabase.from("articles").select("citation_count,view_count").eq("status", "published"),
-        supabase.from("submissions").select("id,title,status,created_at").order("created_at", { ascending: false }).limit(6),
+        supabase
+          .from("submissions")
+          .select("id,title,status,created_at")
+          .order("created_at", { ascending: false })
+          .limit(6),
       ]);
       setS({
         submissionsThisMonth: subMonth.count ?? 0,
@@ -52,9 +77,10 @@ function AdminDash() {
     })();
   }, []);
 
-  const acceptanceRate = s && s.accepted + s.rejected > 0
-    ? Math.round((s.accepted / (s.accepted + s.rejected)) * 100)
-    : null;
+  const acceptanceRate =
+    s && s.accepted + s.rejected > 0
+      ? Math.round((s.accepted / (s.accepted + s.rejected)) * 100)
+      : null;
 
   return (
     <>
@@ -68,7 +94,11 @@ function AdminDash() {
         <Card icon={Clock} label="Pending reviews" value={s?.pendingReviews ?? "…"} />
         <Card icon={FileText} label="Published articles" value={s?.published ?? "…"} />
         <Card icon={Users} label="Active board members" value={s?.boardCount ?? "…"} />
-        <Card icon={CheckCircle2} label="Acceptance rate" value={acceptanceRate === null ? "—" : `${acceptanceRate}%`} />
+        <Card
+          icon={CheckCircle2}
+          label="Acceptance rate"
+          value={acceptanceRate === null ? "—" : `${acceptanceRate}%`}
+        />
         <Card icon={TrendingUp} label="Total citations" value={s?.totalCitations ?? "…"} />
         <Card icon={BookOpen} label="Total submissions" value={s?.totalSubmissions ?? "…"} />
         <Card icon={FileText} label="Article views" value={s?.totalViews ?? "…"} />
@@ -80,17 +110,33 @@ function AdminDash() {
         <div className="mt-4 overflow-hidden rounded-xl border border-border bg-card">
           <table className="w-full text-sm">
             <thead className="bg-secondary/60 text-left text-xs uppercase tracking-wider text-muted-foreground">
-              <tr><th className="p-3">Title</th><th className="p-3">Status</th><th className="p-3">Submitted</th></tr>
+              <tr>
+                <th className="p-3">Title</th>
+                <th className="p-3">Status</th>
+                <th className="p-3">Submitted</th>
+              </tr>
             </thead>
             <tbody className="divide-y divide-border">
               {recent.map((r) => (
                 <tr key={r.id}>
                   <td className="p-3 font-medium">{r.title}</td>
-                  <td className="p-3"><span className="rounded-full bg-secondary px-2 py-0.5 text-xs">{r.status.replace("_", " ")}</span></td>
-                  <td className="p-3 text-muted-foreground">{new Date(r.created_at).toLocaleDateString()}</td>
+                  <td className="p-3">
+                    <span className="rounded-full bg-secondary px-2 py-0.5 text-xs">
+                      {r.status.replace("_", " ")}
+                    </span>
+                  </td>
+                  <td className="p-3 text-muted-foreground">
+                    {new Date(r.created_at).toLocaleDateString()}
+                  </td>
                 </tr>
               ))}
-              {recent.length === 0 && <tr><td colSpan={3} className="p-8 text-center text-muted-foreground">No submissions yet.</td></tr>}
+              {recent.length === 0 && (
+                <tr>
+                  <td colSpan={3} className="p-8 text-center text-muted-foreground">
+                    No submissions yet.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
@@ -99,7 +145,15 @@ function AdminDash() {
   );
 }
 
-function Card({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string | number }) {
+function Card({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  value: string | number;
+}) {
   return (
     <div className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-center justify-between">
