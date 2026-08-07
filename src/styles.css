@@ -115,7 +115,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-brand: var(--brand);
+  --color-brand: hsl(160 50% 35%);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-muted: var(--brand-muted);
   --color-gold: var(--gold);
@@ -125,7 +125,7 @@
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
   --background: oklch(0.995 0.003 90);
   --foreground: oklch(0.19 0.02 200);

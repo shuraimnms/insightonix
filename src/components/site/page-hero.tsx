@@ -15,7 +15,7 @@ export function PageHero({
     <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-brand-muted/40 to-transparent">
       <div className="container-page py-20 lg:py-28">
         {eyebrow ? (
-          <div className="text-[13px] uppercase tracking-[0.22em] text-brand font-semibold">
+          <div className="text-[13px] uppercase tracking-[0.22em] text-white/80 font-semibold">
             {eyebrow}
           </div>
         ) : null}
@@ -23,7 +23,7 @@ export function PageHero({
           {title}
         </h1>
         {intro ? (
-          <p className="mt-6 max-w-3xl text-lg lg:text-[22px] leading-relaxed text-muted-foreground">
+          <p className="mt-6 max-w-3xl text-lg lg:text-[22px] leading-relaxed text-white/90">
             {intro}
           </p>
         ) : null}

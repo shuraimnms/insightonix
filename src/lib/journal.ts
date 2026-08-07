@@ -7,8 +7,8 @@ export const JOURNAL = {
   short: "INSIGHTONIX",
   tagline:
     "A Peer-Reviewed, Open Access International Journal for High-Quality Multidisciplinary Research in Computer Science, Engineering, Medicine, Business, Humanities, and Life Sciences.",
-  issn_online: "2395-6410",
-  issn_print: "2455-0116",
+  issn_online: "3051-2344",
+  issn_print: "3051-2336",
   license: "Open Access",
   frequency: "Quarterly",
   founded: 2021,
