@@ -87,12 +87,14 @@ function ArticlesAdmin() {
           <div className="text-xs uppercase tracking-widest text-brand font-semibold">Content</div>
           <h1 className="mt-1 font-serif text-3xl font-semibold">Articles</h1>
         </div>
-        <button
-          onClick={() => setEdit({ status: "draft", authors: [], keywords: [], sort_order: 0 })}
+        <a
+          href={import.meta.env.VITE_API_URL.includes("localhost") ? "http://localhost:3000/admin/papers/new" : "https://universal-admin-panel-nu.vercel.app/admin/papers/new"}
+          target="_blank"
+          rel="noreferrer"
           className="inline-flex h-10 items-center gap-2 rounded-md bg-brand px-4 text-sm font-semibold text-brand-foreground"
         >
           <Plus className="h-4 w-4" /> New article
-        </button>
+        </a>
       </div>
 
       <div className="mt-6 overflow-hidden rounded-xl border border-border bg-card">
@@ -121,9 +123,14 @@ function ArticlesAdmin() {
                   </td>
                   <td className="p-3">
                     <div className="flex gap-1">
-                      <button onClick={() => setEdit(r)} className="rounded-md p-2 hover:bg-accent">
-                        <Pencil className="h-3.5 w-3.5" />
-                      </button>
+                      <a
+                        href={`${import.meta.env.VITE_API_URL.includes("localhost") ? "http://localhost:3000" : "https://universal-admin-panel-nu.vercel.app"}/admin/papers/${r.id}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-md p-2 hover:bg-accent inline-flex items-center justify-center"
+                      >
+                        <Pencil className="h-3.5 w-3.5 text-foreground" />
+                      </a>
                       <button
                         onClick={() => del(r.id)}
                         className="rounded-md p-2 text-destructive hover:bg-accent"
